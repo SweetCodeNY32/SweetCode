@@ -1,0 +1,20 @@
+{
+  "name": "SweetCode",
+  "version": "1.0.0",
+  "description": "A tool to create study guides for Leetcode",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "keywords": [],
+  "author": "Evelin Goldin, Emilia Yoffie, Alexander Adams, Julian Kang",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.8.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0"
+  }
+}
