@@ -15,9 +15,8 @@ expecting props to be:
   questions: [
     {
       question: question name
-      questionslug: question slug
-      difficulty: difficulty
-      status: 'ac' or something
+      questionslug: question slug 
+      difficulty: difficulty  
       notes: notes to add
     }
   ]
@@ -28,24 +27,12 @@ expecting props to be:
 const Category = (props) => {
   //variable to hold the value of the category name
   let categoryName = props.category;
-  let questionsObject = props.questions;
+  let questionsArray = props.questions;
   
-  //logic for addquestion submit logic
-  async function handleQuestionSubmit(question){
-    let newQuestion = await axios.post('',
-      {
-        category: categoryName,
-        question: question
-      }
-    );
-  }
 
   //logic for saveNotes logic 
   // async function handleNoteSubmit(note, questionKey){
   //   let targetQuestion = questionKey;
-
-
-
   // }
 
   //logic for loading on change 
@@ -53,23 +40,23 @@ const Category = (props) => {
 
   //loop to iterate through the questions associated with this category
   let questions = [];
-  let questionsLength = questionsObject.length;
+  let questionsLength = questionsArray.length;
   for (let i = 0; i < questionsLength; i++){
     questions.push(
-      <Question 
-        {...props.question[i]} 
+      <li key={`${categoryName}question${i}`}><Question 
+        {...props.questionsArray[i]}
+        category={categoryName} 
         //handleNoteSubmit={handleNoteSubmit}
-        key={`${categoryName}question${i}`}
         id={`${categoryName}question${i}`}
-      />
+      /></li>
     )
   }
 
   return(
     <div className="category">
       <h2 className="category-title">{categoryName}</h2>
-      <div className="questions">{questions}</div>
-      <AddQuestion handleQuestionSubmit={handleQuestionSubmit} />
+      <ul className="questions">{questions}</ul>
+      <AddQuestion category={categoryName} handleSubmit={props.handleQuestionSubmit} />
     </div>
   )
 }
