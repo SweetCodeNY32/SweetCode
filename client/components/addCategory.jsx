@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 
 const AddCategory = (props) => {
 
-
   return(
     <div class="add-category">
       <TextField variant="outlined" label="Add category here"></TextField>

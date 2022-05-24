@@ -1,18 +1,33 @@
 //component used to add questions to a specific category
 //will have input text field and add question button
 
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const AddQuestion = (props) => {
+/*
+expecting props to be:
+{
+  handleSubmit: handleQuestionSubmit
+}
 
+*/
+
+const AddQuestion = (props) => {
+  const [question, setQuestion] = useState('');
 
   return(
     <div class="add-question">
-      <TextField variant="outlined" label="Add question here"></TextField>
-      <Button variant="outlined">Add Question</Button>
+      <TextField 
+        variant="outlined" 
+        label="Add question here"
+        onChange={(e) => setQuestion(e.target.value)}
+        >{question}</TextField>
+      <Button 
+        variant="outlined"
+        onClick={(question) => props.handleQuestionSubmit(question)}
+        >Add Question</Button>
     </div>
   )
 }
