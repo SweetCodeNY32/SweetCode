@@ -1,0 +1,1 @@
+//will house the sidebar component and study guide container 
