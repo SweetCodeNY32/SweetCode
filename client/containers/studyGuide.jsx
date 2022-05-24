@@ -3,7 +3,8 @@
 //will have the category containers of that study guide
 //will also have the addcategory component
 
-
+import React from 'react';
+import AddCategory from '../components/addCategory';
 
 const StudyGuide = (props) => {
   //React hook to set state for categories, established as an array of categories
@@ -14,7 +15,21 @@ const StudyGuide = (props) => {
     let fetchedCategories = axios.get('') //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE
     setCategories(fetchedCategories);
   },[])
-  
+
+  //need handle submit logic for adding categories
+  async function handleSubmit(){
+    
+  }
+
+  return(
+    <div class="study-guide">
+
+
+
+      <AddCategory />
+    </div>
+  )
+
 }
 
   
