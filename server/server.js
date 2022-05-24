@@ -12,8 +12,14 @@ app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../client')));
 
+app.get('/api/login', authController.logIn, (req, res) => {
+    console.log('you are in api/login route')
+    return res.status(201).json();
+})
+
 app.get('/signin/github-callback', authController.getToken, authController.getUser, (req, res) => {
     res.cookie('auth', res.locals.accessToken);
+    console.log('you are in /signin/github callback route')
     return res.status(200).redirect('http://localhost:9000'); 
 })
 

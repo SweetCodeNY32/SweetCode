@@ -1,9 +1,10 @@
 //will house the sidebar component and study guide container 
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/sidebar.jsx';
 import StudyGuide from './studyGuide.jsx';
-
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import axios from 'axios';
 
 
 const Home = (props) => {
@@ -21,13 +22,17 @@ const Home = (props) => {
         categories: []
       }
     ]
-
     */
-    let response = await axios.post('/studyguides',{
-      userId
-    });
-    
-    setStudyGuides(response);
+    // async function fetchData(){
+    //   let response = await axios.post('/api/studyguide', {
+    //     userId,
+    //     username
+    //   })
+    //   setStudyGuides(response);
+    // }
+
+    // fetchData();
+
   }, [])
 
 
@@ -50,7 +55,7 @@ const Home = (props) => {
 
 
   return(
-    <div class="home">
+    <div className="home">
       <Sidebar 
         username={username}
         studyGuideNames={studyGuideNames}

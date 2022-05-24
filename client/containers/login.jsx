@@ -1,24 +1,22 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-
-
+import axios from 'axios';
 
 const Login = (props) => {
 
-
   async function handleLogin(){
-    let response = await axios.get('/auth/login');
-    let username = response.username;
-    let userId = response.userId;
+    const response = await axios.get('/api/login');
+    // // let username = response.username;
+    // // let userId = response.userId;
 
-    props.setUser({
-      username,
-      userId
-    });
+    // props.setUser({
+    //   username,
+    //   userId
+    // });
   }
 
   return(
-    <div class="login">
+    <div className="login">
       <h1>Sweet Code</h1>
 
       <Button

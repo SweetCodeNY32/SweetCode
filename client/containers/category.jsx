@@ -66,9 +66,9 @@ const Category = (props) => {
   }
 
   return(
-    <div class="category">
-      <h2 class="category-title">{categoryName}</h2>
-      <div class="questions">{questions}</div>
+    <div className="category">
+      <h2 className="category-title">{categoryName}</h2>
+      <div className="questions">{questions}</div>
       <AddQuestion handleQuestionSubmit={handleQuestionSubmit} />
     </div>
   )

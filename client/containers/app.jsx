@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import Home from './home.jsx'
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import axios from 'axios';
+import Home from './home.jsx';
+import Login from './login.jsx';
 
 //the main application container
 const App = () => {
@@ -22,12 +23,13 @@ const App = () => {
 
   //once user is logged in, will render the sidebar and study guide pages
   //will pass in the username into the sidebar to provide personality to the sidebar
-  else return(
-    <div class="logged-in">
+  else {
+    return(
+    <div className="logged-in">
       <Home user={user}/>
     </div>
-
-  );
+    );
+  }
 }
 
 

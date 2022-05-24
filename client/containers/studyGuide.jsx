@@ -11,8 +11,8 @@ const StudyGuide = (props) => {
   const [categories, setCategories] = useState(props.categories);
 
   //useEffect hook used to fetch to database for the categories associated with the user
-  useEffect(() => {
-    let fetchedCategories = axios.get('') //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE
+  useEffect(async () => {
+    let fetchedCategories = await axios.get('') //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE
     setCategories(fetchedCategories);
   },[])
 
@@ -22,7 +22,7 @@ const StudyGuide = (props) => {
   }
 
   return(
-    <div class="study-guide">
+    <div className="study-guide">
 
 
 
@@ -32,4 +32,5 @@ const StudyGuide = (props) => {
 
 }
 
+export default StudyGuide;
   
