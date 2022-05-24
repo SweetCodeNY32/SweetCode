@@ -14,7 +14,10 @@
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.8.1",
     "axios": "^0.27.2",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.1",
+    "path": "^0.12.7",
+    "pg": "^8.7.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0"
