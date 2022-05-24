@@ -5,13 +5,18 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 //the main application container
 const App = () => {
   //will hold logic for react hooks to manage username and setting username
-  const [username, setUsername] = useState('');
+  const [user, setUser] = useState({
+    username: '',
+    userId: 0
+  });
+  
 
+  
   //if user is not currently signed in, will render the login page
   //login component will have access to setusername 
-  if (username === ''){
+  if (user.username === ''){
     return (
-      <Login setUsername={setUsername}/>
+      <Login setUser={setUser}/>
     );
   }
 
@@ -19,7 +24,7 @@ const App = () => {
   //will pass in the username into the sidebar to provide personality to the sidebar
   else return(
     <div class="logged-in">
-      <Home username={username}/>
+      <Home user={user}/>
     </div>
 
   );
