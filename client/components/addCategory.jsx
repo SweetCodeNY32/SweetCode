@@ -9,7 +9,7 @@ const AddCategory = (props) => {
   const [category, setCategory] = useState('');
 
   return(
-    <div class="add-category">
+    <div className="add-category">
       <TextField 
         variant="outlined" 
         label="Add category here"

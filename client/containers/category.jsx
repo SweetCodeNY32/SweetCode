@@ -26,29 +26,25 @@ expecting props to be:
 
 const Category = (props) => {
   //variable to hold the value of the category name
+  console.log('this is props in Category: ', props)
   let categoryName = props.category;
   let questionsArray = props.questions;
   
-
-  //logic for saveNotes logic 
-  // async function handleNoteSubmit(note, questionKey){
-  //   let targetQuestion = questionKey;
-  // }
-
   //logic for loading on change 
-
 
   //loop to iterate through the questions associated with this category
   let questions = [];
   let questionsLength = questionsArray.length;
   for (let i = 0; i < questionsLength; i++){
     questions.push(
-      <li key={`${categoryName}question${i}`}><Question 
-        {...props.questionsArray[i]}
-        category={categoryName} 
-        //handleNoteSubmit={handleNoteSubmit}
-        id={`${categoryName}question${i}`}
-      /></li>
+      <li key={`${categoryName}question${i}`}>
+        <Question 
+          {...questionsArray[i]}
+          category={categoryName} 
+          //handleNoteSubmit={handleNoteSubmit}
+          id={`${categoryName}question${i}`}
+        />
+      </li>
     )
   }
 

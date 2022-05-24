@@ -15,10 +15,11 @@ expecting props to be:
 */
 
 const AddQuestion = (props) => {
+  console.log('props at AddQuestion', props);
   const [question, setQuestion] = useState('');
   const {category} = props;
   return( 
-    <div class="add-question">
+    <div className="add-question">
       <TextField
         variant="outlined" 
         label="Add question here"

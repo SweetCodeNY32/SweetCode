@@ -31,12 +31,12 @@ const Question = (props) => {
   // const [note, setNote] = useState(notes)
 
   return(
-    <div class="question">
+    <div className="question">
       {status
         ? <Checkbox checked/>
         : <Checkbox />}
-      <a class="link" href={link}>{question}</a>
-      <p class="difficulty">{difficulty}</p>
+      <a className="link" href={link}>{question}</a>
+      <p className="difficulty">{difficulty}</p>
       {/* <TextField
         class='question-notes'
         label='Notes'

@@ -1,6 +1,6 @@
 //will house the sidebar component and study guide container 
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from './sidebar.jsx';
 import StudyGuide from './studyGuide.jsx';
 import SidebarRoutes from '../components/routes.jsx'
@@ -12,14 +12,9 @@ const Home = (props) => {
   const username = props.user.username;
   const userId = props.user.userId;
 
-  async function fetchData(){
-    let response = await axios.post('/api/studyguide', {
-      userId,
-      username
-    })
-    setStudyGuides(response);
-  }
-
+  /*
+  what are we expecting from this fetchData?
+  */
   const fakeData = [
     {
       name: 'study-guide-1',
@@ -35,8 +30,19 @@ const Home = (props) => {
     }
   ]
 
+  async function fetchData(){
+    let response = await axios.post('/api/studyguide', {
+      userId,
+      username
+    })
+    setStudyGuides(response);
+  }
+
   //fetchData();
   const [studyGuides, setStudyGuides] = useState(fakeData);
+  
+  
+  
   //will have useEffect logic to make fetch request to server for all of the study guides associated with this user 
   useEffect(() => {
     //getting study guides from studyguides endpoint
@@ -50,12 +56,8 @@ const Home = (props) => {
     fetchData();
   }, []);
 
-
-
-
   //handle logic for adding new study guides 
   
-
 
   //handle logic for 
 
@@ -86,13 +88,15 @@ const Home = (props) => {
   console.log('study guide names:', studyGuideNames);
   //console.log('routes: ', routes);
 
+
+ 
   return(
     <div className="home">
       <Sidebar 
         username={username}
         studyGuideNames={studyGuideNames}
       />
-      
+      <StudyGuide fakeData={fakeData[0]}/>
       {/* Should render a study guide below when clicking on a study guide on sidebar*/}
       
       {/* <SidebarRoutes 
