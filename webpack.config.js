@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['@babel/polyfill', './client/index.jsx'],
+  entry: ['@babel/polyfill', './client/index.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
@@ -46,7 +46,7 @@ module.exports = {
   devServer: {
     port: 9000,
     compress: true,
-    historyApiFallback: true,
+    // historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, './client'),
     },
