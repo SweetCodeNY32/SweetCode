@@ -4,6 +4,7 @@
   "description": "A tool to create study guides for Leetcode",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "start": "node server/server.js"
   },
   "keywords": [],
@@ -16,5 +17,15 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "nodemon": "^2.0.16",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
   }
 }
