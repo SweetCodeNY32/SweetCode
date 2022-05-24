@@ -4,11 +4,17 @@
 //will also have the addcategory component
 
 
+
+const StudyGuide = (props) => {
   //React hook to set state for categories, established as an array of categories
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(props.categories);
 
   //useEffect hook used to fetch to database for the categories associated with the user
   useEffect(() => {
     let fetchedCategories = axios.get('') //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE
     setCategories(fetchedCategories);
-  }, [])
+  },[])
+
+}
+
+  

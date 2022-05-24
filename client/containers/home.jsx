@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Sidebar from '../components/sidebar.jsx';
-import studyGuide from './studyGuide.jsx';
+import StudyGuide from './studyGuide.jsx';
 
 
 
@@ -13,7 +13,7 @@ const Home = (props) => {
   //will have useEffect logic to make fetch request to server for all of the study guides associated with this user 
   useEffect(() => {
     //getting study guides from studyguides endpoint
-    //expect an array of objects:
+    //expect response to be an array of objects:
     /*
     [
       {
@@ -24,13 +24,26 @@ const Home = (props) => {
 
     */
     let response = await axios.get('/studyguides');
-
+    setStudyGuides(response);
   }, [])
 
 
+  //iterating through the length of studyGuides 
+  let studyGuideLength = studyGuides.length;
+  let studyGuideArray = []
+  for (let i = 0; i < studyGuideLength; i++){
+    let guideName = studyGuides[i].name;
+    let categories = studyGuides[i].categories;
+    studyGuideArray.push(
+      <StudyGuide 
+        name={guideName}
+        categories={categories}
+      />
+    )
+  }
   return(
     <div class="home">
-      <Sidebar />
+      <Sidebar username={username}/>
       
     </div>
   )
