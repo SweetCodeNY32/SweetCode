@@ -26,7 +26,7 @@ const AddQuestion = (props) => {
         >{question}</TextField>
       <Button 
         variant="outlined"
-        onClick={(question) => props.handleQuestionSubmit(question)}
+        onClick={() => props.handleQuestionSubmit(question)}
         >Add Question</Button>
     </div>
   )

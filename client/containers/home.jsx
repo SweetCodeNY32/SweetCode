@@ -23,14 +23,19 @@ const Home = (props) => {
     ]
 
     */
-    let response = await axios.get('/studyguides');
+    let response = await axios.post('/studyguides',{
+      userId
+    });
+    
     setStudyGuides(response);
   }, [])
 
 
   //iterating through the length of studyGuides 
+  //creating an array of studyGuide objects and array of studyGuide names 
   let studyGuideLength = studyGuides.length;
   let studyGuideArray = []
+  let studyGuideNames = [];
   for (let i = 0; i < studyGuideLength; i++){
     let guideName = studyGuides[i].name;
     let categories = studyGuides[i].categories;
@@ -40,10 +45,16 @@ const Home = (props) => {
         categories={categories}
       />
     )
+    studyGuideNames.push(guideName);
   }
+
+
   return(
     <div class="home">
-      <Sidebar username={username}/>
+      <Sidebar 
+        username={username}
+        studyGuideNames={studyGuideNames}
+      />
       
     </div>
   )

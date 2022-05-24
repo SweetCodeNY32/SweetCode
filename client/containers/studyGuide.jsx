@@ -14,7 +14,7 @@ const StudyGuide = (props) => {
     let fetchedCategories = axios.get('') //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE
     setCategories(fetchedCategories);
   },[])
-
+  
 }
 
   
