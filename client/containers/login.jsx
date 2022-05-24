@@ -7,10 +7,14 @@ const Login = (props) => {
 
 
   async function handleLogin(){
-    let response = axios.get('/auth/login');
+    let response = await axios.get('/auth/login');
     let username = response.username;
+    let userId = response.userId;
 
-    props.setUsername(username);
+    props.setUser({
+      username,
+      userId
+    });
   }
 
   return(
