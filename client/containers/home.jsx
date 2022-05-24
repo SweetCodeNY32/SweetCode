@@ -92,11 +92,17 @@ const Home = (props) => {
  
   return(
     <div className="home">
-      <Sidebar 
-        username={username}
-        studyGuideNames={studyGuideNames}
-      />
-      <StudyGuide fakeData={fakeData[0]}/>
+      <div id="sidebar">
+         <Sidebar 
+          username={username}
+          studyGuideNames={studyGuideNames}
+         />
+      </div>
+      <div id="study-guide">
+        <StudyGuide fakeData={fakeData[0]}/>
+      </div>
+     
+      
       {/* Should render a study guide below when clicking on a study guide on sidebar*/}
       
       {/* <SidebarRoutes 

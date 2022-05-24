@@ -78,25 +78,49 @@ const StudyGuide = (props) => {
       category: 'arrays',
       questions: [
         {
-        question: 'two sum',
-        questionslug: 'two-sum',
-        difficulty: 'hard',  
-        notes: ''
+          question: 'two sum',
+          questionslug: 'two-sum',
+          difficulty: 'hard',  
+          notes: ''
+        },
+        {
+          question: 'two sum',
+          questionslug: 'two-sum',
+          difficulty: 'hard',  
+          notes: ''
+        },
+        {
+          question: 'two sum',
+          questionslug: 'two-sum',
+          difficulty: 'hard',  
+          notes: ''
+        }
+      ]
+    },
+  {
+      category: 'BSTs',
+      questions: [
+        {
+          question: 'three sum',
+          questionslug: 'three-sum',
+          difficulty: 'easy',  
+          notes: ''
         }
       ]
     }
+  ];
   ]
   */
   //function to fetch study guide data from the server 
   async function fetchData(){
-    const response = await axios.get('/api/studyGuide'); //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE BASED ON STUDY GUIDE?
+    const response = await axios.get(`/api/studyguide/${studyGuideName}`); //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE BASED ON STUDY GUIDE?
     setStudyGuide(response);
   } 
   
   //handling submit logic for categories
   //will also be sending the name of the study guide so it knows which study guide to belong to
   async function handleCategorySubmit(category){
-    const response = await axios.post('/api/studyGuide/category',{
+    const response = await axios.post('/api/studyguide/category',{
       category: category,
       name: studyGuideName
     });
@@ -107,7 +131,7 @@ const StudyGuide = (props) => {
   //handling submit logic for questions
   //will also be sending the category name so it knows which category to belong to 
   async function handleQuestionSubmit(question, category){
-    const response = await axios.post('/api/studyGuide/question', {
+    const response = await axios.post('/api/studyguide/question', {
       category: category,
       question: question
     })
