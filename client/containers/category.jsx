@@ -32,7 +32,7 @@ const Category = (props) => {
   
   //logic for addquestion submit logic
   async function handleQuestionSubmit(question){
-    let newQuestion = axios.post('',
+    let newQuestion = await axios.post('',
       {
         category: categoryName,
         question: question
