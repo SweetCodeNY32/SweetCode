@@ -3,7 +3,6 @@
 //will have a bunch of question components
 //will also have the add question component 
 
-
 import React, {useState, useEffect} from 'react';
 import Question from '../components/question.jsx'
 import AddQuestion from '../components/addQuestion.jsx'
@@ -21,7 +20,6 @@ expecting props to be:
     }
   ]
 }
-
 */
 
 const Category = (props) => {

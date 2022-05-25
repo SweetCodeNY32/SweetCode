@@ -4,122 +4,108 @@
 //will also have the addcategory component
 
 import axios from 'axios';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AddCategory from '../components/addCategory';
 import Category from './category.jsx';
 
-const fakeStudyGuide = [
-  {
-    category: 'arrays',
-    questions: [
+const fakeStudyGuide = 
+    [
       {
-        question: 'two sum',
-        questionslug: 'two-sum',
-        difficulty: 'hard',  
-        notes: ''
+        category: 'Arrays',
+        questions: [
+          {
+            question: 'two sum',
+            questionslug: 'two-sum',
+            difficulty: 'hard',  
+            notes: ''
+          },
+          {
+            question: 'three sum',
+            questionslug: 'three-sum',
+            difficulty: 'easy',  
+            notes: ''
+          }
+        ]
       },
       {
-        question: 'two sum',
-        questionslug: 'two-sum',
-        difficulty: 'hard',  
-        notes: ''
-      },
-      {
-        question: 'two sum',
-        questionslug: 'two-sum',
-        difficulty: 'hard',  
-        notes: ''
+        category: 'BSTs',
+        questions: [
+          {
+            question: 'maximum depth of binary tree',
+            questionslug: 'maximum-depth-of-binary-tree',
+            difficulty: 'easy',
+            status: 'ac',
+            notes: ''
+          }
+        ]
       }
     ]
-  },
-  {
-    category: 'BSTs',
-    questions: [
-      {
-        question: 'three sum',
-        questionslug: 'three-sum',
-        difficulty: 'easy',  
-        notes: ''
-      }
-    ]
-  }
-];
+/*
+props = {
+  name: 'study-guide-1',
+  categories: ['BSTs', 'Arrays']
+}
+
+*/
 
 const StudyGuide = (props) => {
   //React hook to set state for categories, established as an array of categories
   const [studyGuide, setStudyGuide] = useState(fakeStudyGuide);//useState([]);
+  //const [categories, setCategories] = useState(props.categories);
   const studyGuideName = props.name;
-  //console.log('clicked here');
-  
-  // props --> fakeData = [
-  //   {
-  //     name: 'study-guide-1',
-  //     categories: [
-  //       'BSTs', 'Arrays', 'Strings'
-  //     ]
-  //   },
-  //   {
-  //     name: 'study-guide-2',
-  //     categories: [
-  //       'matrixes', 'dynamic programming'
-  //     ]
-  //   }
-  // ]
-
+  const categories = props.categories;
+  console.log('categories in this study guide: ', categories)
 
   //useEffect hook used to fetch to database for the categories associated with the user
-  // useEffect(() => {
-  //   fetchData();
-  // },[])
+  //will run when studyGuide is updated 
+  useEffect(() => {
+    fetchData();
+  },[studyGuide])
 
-  /* HOW WE ARE EXPECTING THE DATA TO COME BACK FROM THE FETCH DATA QUERY
-  [
-    {
-      category: 'arrays',
-      questions: [
-        {
-          question: 'two sum',
-          questionslug: 'two-sum',
-          difficulty: 'hard',  
-          notes: ''
-        },
-        {
-          question: 'two sum',
-          questionslug: 'two-sum',
-          difficulty: 'hard',  
-          notes: ''
-        },
-        {
-          question: 'two sum',
-          questionslug: 'two-sum',
-          difficulty: 'hard',  
-          notes: ''
-        }
-      ]
-    },
-  {
-      category: 'BSTs',
-      questions: [
-        {
-          question: 'three sum',
-          questionslug: 'three-sum',
-          difficulty: 'easy',  
-          notes: ''
-        }
-      ]
-    }
-  ];
-  ]
+  /* HOW WE ARE EXPECTING THE DATA TO COME BACK FROM THE FETCH DATA QUERY?
   */
   //function to fetch study guide data from the server 
   async function fetchData(){
-    const response = await axios.get(`/api/studyguide/${studyGuideName}`); //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE BASED ON STUDY GUIDE?
+    const response = await axios.get(`/api/studyguide/add/${studyGuideName}`); //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE BASED ON STUDY GUIDE?
+    //hoping to get object that looks like
+    // [
+    //   {
+    //     category: 'Arrays',
+    //     questions: [
+    //       {
+    //         question: 'two sum',
+    //         questionslug: 'two-sum',
+    //         difficulty: 'hard',  
+    //         notes: ''
+    //       },
+    //       {
+    //         question: 'three sum',
+    //         questionslug: 'three-sum',
+    //         difficulty: 'easy',  
+    //         notes: ''
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     category: 'BSTs',
+    //     questions: [
+    //       {
+    //         question: 'maximum depth of binary tree',
+    //         questionslug: 'maximum-depth-of-binary-tree',
+    //         difficulty: 'easy',
+    //         status: 'ac',
+    //         notes: ''
+    //       }
+    //     ]
+    //   }
+    // ]
     setStudyGuide(response);
   } 
   
   //handling submit logic for categories
   //will also be sending the name of the study guide so it knows which study guide to belong to
   async function handleCategorySubmit(category){
+    
     const response = await axios.post('/api/studyguide/category',{
       category: category,
       name: studyGuideName

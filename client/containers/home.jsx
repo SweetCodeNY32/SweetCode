@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './sidebar.jsx';
 import StudyGuide from './studyGuide.jsx';
 import SidebarRoutes from '../components/routes.jsx'
-//import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -14,35 +14,31 @@ const Home = (props) => {
 
   /*
   what are we expecting from this fetchData?
-  */
+ */
   const fakeData = [
     {
       name: 'study-guide-1',
-      categories: [
-        'BSTs', 'Arrays', 'Strings'
-      ]
+      categories: ['BSTs', 'Arrays']
     },
     {
       name: 'study-guide-2',
-      categories: [
-        'matrixes', 'dynamic programming'
-      ]
+      categories: ['matrices', 'dynamic programming']
     }
-  ]
+  ];
+
 
   async function fetchData(){
-    let response = await axios.post('/api/studyguide', {
-      userId,
-      username
-    })
-    setStudyGuides(response);
+    // let response = await axios.post('/api/studyguide', {
+    //   userId,
+    //   username
+    // })
+    // setStudyGuides(response);
+    
   }
 
   //fetchData();
   const [studyGuides, setStudyGuides] = useState(fakeData);
-  
-  
-  
+
   //will have useEffect logic to make fetch request to server for all of the study guides associated with this user 
   useEffect(() => {
     //getting study guides from studyguides endpoint
@@ -54,6 +50,7 @@ const Home = (props) => {
     //   }
     // ]
     fetchData();
+    
   }, []);
 
   //handle logic for adding new study guides 
@@ -61,27 +58,33 @@ const Home = (props) => {
 
   //handle logic for 
 
-
+  console.log('in studyguides state: ',studyGuides);
   //iterating through the length of studyGuides 
   //creating an array of studyGuide objects and array of studyGuide names 
   const studyGuideLength = studyGuides.length;
   const studyGuideComponentArray = [];
   const studyGuideNames = [];
-  //const routes = [];
+  const routes = [];
   for (let i = 0; i < studyGuideLength; i++){
+    // let guideName = studyGuides[i].name;
+    // let categories = studyGuides[i].categories;
+    // studyGuideComponentArray.push(<StudyGuide name={guideName} categories={categories}/>)
+    // studyGuideNames.push(guideName);
+
     let guideName = studyGuides[i].name;
     let categories = studyGuides[i].categories;
-    studyGuideComponentArray.push(<StudyGuide name={guideName} categories={categories}/>)
+    let component = <StudyGuide name={guideName} categories={categories}/>;
+    studyGuideComponentArray.push(component)
     studyGuideNames.push(guideName);
 
-    // routes.push(
-    //   <Route 
-    //     exact
-    //     path={`${guideName}`} 
-    //     element={studyGuide} 
-    //     key={`route${guideName}`}
-    //   />
-    // )
+    routes.push(
+      <Route 
+        exact
+        path={`${guideName}`} 
+        element={component} 
+        key={`route${guideName}`}
+      />
+    )
   }
 
   console.log('study guide array:', studyGuideComponentArray)
@@ -92,16 +95,11 @@ const Home = (props) => {
  
   return(
     <div className="home">
-      <div id="sidebar">
-         <Sidebar 
-          username={username}
-          studyGuideNames={studyGuideNames}
-         />
+
+      {/* <div id="study-guide">
+        <StudyGuide categories={fakeData[0].categories}/>
       </div>
-      <div id="study-guide">
-        <StudyGuide fakeData={fakeData[0]}/>
-      </div>
-     
+      */}
       
       {/* Should render a study guide below when clicking on a study guide on sidebar*/}
       
@@ -109,11 +107,17 @@ const Home = (props) => {
         studyGuideNames={studyGuideNames} 
         studyGuideComponentArray={studyGuideComponentArray}
       /> */}
-      {/* <BrowserRouter>
+      <BrowserRouter>
+      <div id="sidebar">
+         <Sidebar 
+          username={username}
+          studyGuideNames={studyGuideNames}
+         />
+      </div>
         <Routes>
           {routes}
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
       
     </div>
   )
