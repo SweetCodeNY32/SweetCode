@@ -18,7 +18,7 @@ const Sidebar = (props) => {
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i++){
     studyGuideArray.push(
-      <li key={`studyGuide${i}`}><Link to={`/${studyGuides[i]}`}>
+      <li className="sidebar-guides" key={`studyGuide${i}`}><Link to={`/${studyGuides[i]}`}>
         <Button 
           variant="text" 
         >{studyGuides[i]}</Button>
@@ -31,10 +31,10 @@ const Sidebar = (props) => {
   }
 
   return(
-    <div className='sidebar'>
-      <h3 className="intro">Hey {username}, here are your study guides!</h3>
+    <div id='sidebar'>
+      <h3 id="sidebar-intro">Hey {username}, here are your study guides!</h3>
       <ul>
-        <li><Button variant="text">Create a new study guide</Button></li>
+        <li id="sidebar-button"><Button variant="text">Create a new study guide</Button></li>
         {studyGuideArray}
       </ul>
     </div>

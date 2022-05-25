@@ -21,12 +21,14 @@ const AddQuestion = (props) => {
   return( 
     <div className="add-question">
       <TextField
+        className="question-text"
         variant="outlined" 
         label="Add question here"
         onChange={(e) => setQuestion(e.target.value)}
         >{question}</TextField>
       
       <Button 
+        className="question-button"
         variant="outlined"
         onClick={() => props.handleSubmit(question, category)}
         >Add Question</Button>

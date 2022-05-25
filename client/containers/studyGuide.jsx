@@ -40,6 +40,32 @@ const fakeStudyGuide =
         ]
       }
     ]
+
+const fakeStudyGuideMap = {
+  "arrays": [
+    {
+      question: 'two sum',
+      questionslug: 'two-sum',
+      difficulty: 'hard',  
+      notes: ''
+    },
+    {
+      question: 'three sum',
+      questionslug: 'three-sum',
+      difficulty: 'easy',  
+      notes: ''
+    }
+  ],
+  "BSTs": [
+    {
+      question: 'maximum depth of binary tree',
+      questionslug: 'maximum-depth-of-binary-tree',
+      difficulty: 'easy',
+      status: 'ac',
+      notes: ''
+    }
+  ]
+}
 /*
 props = {
   name: 'study-guide-1',
@@ -50,7 +76,7 @@ props = {
 
 const StudyGuide = (props) => {
   //React hook to set state for categories, established as an array of categories
-  const [studyGuide, setStudyGuide] = useState(fakeStudyGuide);//useState([]);
+  const [studyGuide, setStudyGuide] = useState([]);//useState([]);
   //const [categories, setCategories] = useState(props.categories);
   const studyGuideName = props.name;
   const categories = props.categories;
@@ -60,13 +86,13 @@ const StudyGuide = (props) => {
   //will run when studyGuide is updated 
   useEffect(() => {
     fetchData();
-  },[studyGuide])
+  },[])
 
   /* HOW WE ARE EXPECTING THE DATA TO COME BACK FROM THE FETCH DATA QUERY?
   */
   //function to fetch study guide data from the server 
   async function fetchData(){
-    const response = await axios.get(`/api/studyguide/add/${studyGuideName}`); //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE BASED ON STUDY GUIDE?
+    //const response = await axios.get(`/api/studyguide/add/${studyGuideName}`); //ADD ENDPOINT TO FETCH FOR CATEGORIES HERE BASED ON STUDY GUIDE?
     //hoping to get object that looks like
     // [
     //   {
@@ -99,7 +125,9 @@ const StudyGuide = (props) => {
     //     ]
     //   }
     // ]
-    setStudyGuide(response);
+    //setStudyGuide(response);
+
+    setStudyGuide(fakeStudyGuide)
   } 
   
   //handling submit logic for categories
@@ -141,7 +169,7 @@ const StudyGuide = (props) => {
 
   return(
     <div className="study-guide">
-      <h2>{studyGuideName}</h2>
+      <h2 id="study-guide-title">{studyGuideName}</h2>
       {categoryArray}
       <AddCategory handleSubmit={handleCategorySubmit}/>
     </div>

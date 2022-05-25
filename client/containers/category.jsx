@@ -48,7 +48,7 @@ const Category = (props) => {
 
   return(
     <div className="category">
-      <h2 className="category-title">{categoryName}</h2>
+      <h3 className="category-title">{categoryName}</h3>
       <ul className="questions">{questions}</ul>
       <AddQuestion category={categoryName} handleSubmit={props.handleQuestionSubmit} />
     </div>

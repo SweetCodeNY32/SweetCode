@@ -33,8 +33,8 @@ const Question = (props) => {
   return(
     <div className="question">
       {status
-        ? <Checkbox checked/>
-        : <Checkbox />}
+        ? <Checkbox className="checkbox" checked/>
+        : <Checkbox className="checkbox"/>}
       <a className="link" href={link}>{question}</a>
       <p className="difficulty">{difficulty}</p>
       {/* <TextField

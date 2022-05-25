@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './sidebar.jsx';
 import StudyGuide from './studyGuide.jsx';
-import SidebarRoutes from '../components/routes.jsx'
+import Modal from './modal.jsx';
 import {BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ const Home = (props) => {
     //   username
     // })
     // setStudyGuides(response);
-    
+    setStudyGuides(fakeData)
   }
 
   //fetchData();
@@ -54,9 +54,18 @@ const Home = (props) => {
   }, []);
 
   //handle logic for adding new study guides 
-  
+  async function handleModalSubmit(guideName, categories){
+    guideName = guideName.replace(/\s/g, '-');
+    const newGuide = {
+      name: guideName,
+      categories: categories
+    };
 
-  //handle logic for 
+    await axios.post('', newGuide)
+    setStudyGuides(...studyGuides, newGuide);
+  }
+
+  
 
   console.log('in studyguides state: ',studyGuides);
   //iterating through the length of studyGuides 
@@ -108,18 +117,21 @@ const Home = (props) => {
         studyGuideComponentArray={studyGuideComponentArray}
       /> */}
       <BrowserRouter>
-      <div id="sidebar">
+      <div id="sidebar-home">
          <Sidebar 
           username={username}
           studyGuideNames={studyGuideNames}
          />
       </div>
+      <div id='study-guides-home'>
         <Routes>
           {routes}
         </Routes>
+      </div>
       </BrowserRouter>
-      
+      <Modal handleSubmit={handleModalSubmit}/>
     </div>
+    
   )
 }
 

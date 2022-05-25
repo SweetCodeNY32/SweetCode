@@ -11,12 +11,14 @@ const AddCategory = (props) => {
   return(
     <div className="add-category">
       <TextField 
+        className="category-text"
         variant="outlined" 
         label="Add category here"
         onChange={(e) => setCategory(e.target.value)}
       >{category}</TextField>
       
       <Button 
+        className="category-button"
         variant="outlined"
         onClick={() => props.handleSubmit(category)}
       >Add Category</Button>

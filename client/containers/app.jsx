@@ -7,8 +7,8 @@ import Login from './login.jsx';
 const App = () => {
   //will hold logic for react hooks to manage username and setting username
   const [user, setUser] = useState({
-    username: 'yes',
-    userId: 0
+    username: '',
+    userId: '0'
   });
   
 
