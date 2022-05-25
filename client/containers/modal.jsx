@@ -19,6 +19,14 @@ const Modal = (props) => {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]); 
 
+  const categoriesArray = []
+  for (let i = 0; i < categories.length; i++){
+    categoriesArray.push(
+      <li>
+        {categories[i]}
+      </li>
+    )
+  }
 
   return(
     <div className="modal">
@@ -37,15 +45,18 @@ const Modal = (props) => {
         <TextField 
         className="modal-category-text"
         variant="outlined" 
-        label="Add categoru here"
+        label="Add category here"
         onChange={(e) => setCategory(e.target.value)}
         >{guideName}</TextField>
       <Button 
         className="modal-category-button"
         variant="outlined"
-        onClick={() => setCategories(...categories, category)}
+        onClick={() => setCategories([...categories, category])}
       >Add Category</Button>
-      {categories}
+      <ul>
+        {categoriesArray}
+      </ul>
+      
       </div>
 
       <div id="modal-submit">
