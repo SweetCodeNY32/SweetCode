@@ -3,7 +3,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
+// Import controllers
 const authController = require('./controllers/authController');
+const dbController = require('./controllers/dbController')
 require('dotenv').config;
 const clientId = process.env.CLIENT_ID;
 const cors = require('cors');
@@ -28,26 +30,18 @@ app.get('/api/login', async (req, res) => {
 
 // });
 
-// app.get()
 
 app.get(
   '/signin/github-callback',
-  // authController.logIn,
   authController.getToken,
-  // authController.checkForCookie,
-  // authController.getUser,
+  dbController.addNewUser,
   async (req, res) => {
     res.cookie('auth', res.locals.accessToken);
-    console.log('callback cookies', req.cookies);
-    // console.log(res.locals.gh_username);
-    // console.log(res.locals.gh_node_id);
     return res.status(200).redirect('http://localhost:9000/');
   }
 );
 
 app.get('/api/checkauth', authController.getUser, (req, res) => {
-  console.log('username:', res.locals.gh_username);
-  console.log('node_id:', res.locals.gh_node_id);
   if (res.locals.gh_username) {
     return res.status(200).json({username: res.locals.gh_username, node_id: res.locals.gh_node_id});
   } else {
@@ -55,27 +49,43 @@ app.get('/api/checkauth', authController.getUser, (req, res) => {
   }
 })
 
-// app.get(
-//   '/api/getUserData',
+// Creates a new study guide.
+app.post(
+  '/api/studyguide/create',
+  dbController.createStudyGuide,
+  (req, res) => {
+    return res.sendStatus(200);
+  }
+)
+
+app.post(
+  '/api/studyguide/category',
   
-//   (req, res) => {
-//     // console.log('res.locals.github:', res.locals.github);
-//     return res.status(200).redirect('http://localhost:9000');
-//   }
-// );
+)
 
-//Handles request when user logs in
-// app.use('/api/signin');
+// Retrieves a user's study guides.
+app.post(
+  '/api/studyguide',
+  dbController.getUserStudyGuides, 
+  dbController.getStudyGuideCategories,
+  (req, res) => {
+    const { studyGuidesArray } = res.locals;
+    console.log(studyGuidesArray);
+    return res.status(201).json(studyGuidesArray);
+  }
+);
 
-// Adds the first study guide
-app.post('/api/studyguide', (req, res) => {
-  return res.status(201).json();
+app.post(
+  '/api/problems/create',
+  (req, res) => {
+    return res.status(201).json();
+  }
+)
+
+// Retrieves problems from a user's specific study guide
+app.post('/api/problems', (req, res) => {
+    return res.status(201).json();
 });
-
-// //Adds new problems to the study guide
-// app.post('/api/problems', (req, res) => {
-//     return res.status(201).json()
-// });
 
 '/',
   (req, res) =>

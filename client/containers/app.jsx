@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import Home from './home.jsx';
-import Login from './login.jsx';
+import Home from './Home.jsx';
+import Login from './Login.jsx';
 
 //the main application container
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
     username: '',
     nodeId: '0'
   });
-
+  console.log('user', user);
   useEffect(() => {
     async function checkAuthentication() {
       let response = await axios.get('/api/checkauth')

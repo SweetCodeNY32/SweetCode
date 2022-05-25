@@ -71,6 +71,12 @@ ul{
   
 }
 
+<<<<<<< HEAD
 .modal{
   padding: 1em;
+=======
+#modal-category{
+  display: flex;
+  flex-direction: column;
+>>>>>>> dev
 }

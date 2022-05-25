@@ -1,9 +1,9 @@
 //will house the sidebar component and study guide container 
 
 import React, { useEffect, useState } from 'react';
-import Sidebar from './sidebar.jsx';
-import StudyGuide from './studyGuide.jsx';
-import Modal from './modal.jsx';
+import Sidebar from './Sidebar.jsx';
+import StudyGuide from './StudyGuide.jsx';
+import Modal from './StudyGuideModal.jsx';
 import {BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -24,30 +24,31 @@ const fakeData = [
 const Home = (props) => {
   const username = props.user.username;
   const nodeId = props.user.nodeId;
+  console.log('this is the node id: ', nodeId);
 
   const [studyGuides, setStudyGuides] = useState(fakeData);
 
   async function fetchData(){
     // let response = await axios.post('/api/studyguide', {
     //   userId
-    // })
+    // });
     // setStudyGuides(response);
     setStudyGuides(fakeData)
   }
-  
+  //update
   //will have useEffect logic to make fetch request to server for all of the study guides associated with this user 
-  useEffect(() => {
-    //getting study guides from studyguides endpoint
-    //expect response to be an array of objects:
-    // [
-    //   {
-    //     name:
-    //     categories: []
-    //   }
-    // ]
-    fetchData();
+  // useEffect(() => {
+  //   //getting study guides from studyguides endpoint
+  //   //expect response to be an array of objects:
+  //   // [
+  //   //   {
+  //   //     name:
+  //   //     categories: []
+  //   //   }
+  //   // ]
+  //   fetchData();
     
-  }, []);
+  // }, []);
 
   //handle logic for adding new study guides 
   async function handleModalSubmit(guideName, categories){
@@ -58,12 +59,12 @@ const Home = (props) => {
       categories: categories
     };
 
-    //await axios.post('/api/studyguide/add', newGuide)
+    //await axios.post('', newGuide)
+    console.log('this is the new study guide added:', newGuide);
+    await axios.post('/api/studyguide/create', newGuide)
     setStudyGuides([...studyGuides, newGuide]);
   }
  
-  console.log('in studyguides state: ',studyGuides);
-
   //iterating through the length of studyGuides 
   //creating an array of studyGuide objects and array of studyGuide names 
   const studyGuideLength = studyGuides.length;
@@ -95,6 +96,7 @@ const Home = (props) => {
          <Sidebar 
           username={username}
           studyGuideNames={studyGuideNames}
+          handleModalSubmit={handleModalSubmit}
          />
       </div>
       <div id='study-guides-home'>
@@ -103,7 +105,7 @@ const Home = (props) => {
         </Routes>
       </div>
       </BrowserRouter>
-      <Modal handleSubmit={handleModalSubmit}/>
+      {/* <Modal handleSubmit={handleModalSubmit}/> */}
     </div>
     
   )

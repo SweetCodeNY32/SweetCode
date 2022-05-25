@@ -22,7 +22,7 @@ const Modal = (props) => {
   const categoriesArray = []
   for (let i = 0; i < categories.length; i++){
     categoriesArray.push(
-      <li key={`categories${i}`}>
+      <li key={`modal${categories[i]}${i}`}>
         {categories[i]}
       </li>
     )

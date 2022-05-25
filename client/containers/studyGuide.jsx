@@ -6,7 +6,7 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import AddCategory from '../components/addCategory';
-import Category from './category.jsx';
+import Category from './Category.jsx';
 
 
 
