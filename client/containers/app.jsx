@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import Home from './home.jsx';
-import Login from './login.jsx';
+import Home from './Home.jsx';
+import Login from './Login.jsx';
 
 //the main application container
 const App = () => {

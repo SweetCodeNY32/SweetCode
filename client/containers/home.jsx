@@ -1,9 +1,9 @@
 //will house the sidebar component and study guide container 
 
 import React, { useEffect, useState } from 'react';
-import Sidebar from './sidebar.jsx';
-import StudyGuide from './studyGuide.jsx';
-import Modal from './modal.jsx';
+import Sidebar from './Sidebar.jsx';
+import StudyGuide from './StudyGuide.jsx';
+import Modal from './StudyGuideModal.jsx';
 import {BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 
