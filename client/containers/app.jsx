@@ -25,7 +25,7 @@ const App = () => {
       } else { 
         setUser({
           username: '', 
-          userId: 0 
+          userId: '0' 
         })
       }
     }
