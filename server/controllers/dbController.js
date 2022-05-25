@@ -96,9 +96,23 @@ dbController.getStudyGuideCategories = async (req, res, next) => {
  * Creates a new study guide based on the user's id.
  */
 dbController.createStudyGuide = async (req, res, next) => {
-  const { userId } = req.body;
+  const { userId, name, categories } = req.body;
   console.log(userId);
+  // console.log(userId);
+  // console.log(name);
+  // console.log(categories);
   try {
+    let queryString = `INSERT INTO study_guides (name, user_id)
+      VALUES ($1, (SELECT _id FROM users WHERE gh_node_id=$2))
+      RETURNING _id;`
+    let response = await db.query(queryString, [name, userId]);
+    const studyGuideId = response.rows[0]._id;
+    res.locals.studyGuideId = studyGuideId;
+    for (let i = 0; i < categories.length; i += 1) {
+      queryString = `INSERT INTO categories (name, study_guide_id)
+        VALUES ($1, (SELECT _id FROM study_guides WHERE _id=$2))`
+      await db.query(queryString, [categories[i], studyGuideId]);
+    }
     return next();
   } catch (err) {
     return next({

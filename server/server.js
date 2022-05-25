@@ -42,8 +42,6 @@ app.get(
 );
 
 app.get('/api/checkauth', authController.getUser, (req, res) => {
-  // console.log('username:', res.locals.gh_username);
-  // console.log('node_id:', res.locals.gh_node_id);
   if (res.locals.gh_username) {
     return res.status(200).json({username: res.locals.gh_username, node_id: res.locals.gh_node_id});
   } else {
