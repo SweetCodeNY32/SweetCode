@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 
 
@@ -12,12 +12,14 @@ const Login = (props) => {
   //   useNavigate(path);
   // }
 
-  async function handleLogin(){
+   function handleLogin(){
     // await axios.get('/api/login');
     console.log('button clicked')
+  
+   
     // let username = response.username;
     // // let userId = response.userId;
-await useNavigate('/api/login')
+ 
     // props.setUser({
     //   username,
     //   userId

@@ -52,6 +52,7 @@ module.exports = {
     },
     proxy: {
       '/api': 'http://localhost:3000',
+      // '/signin/github-callback': 'http://localhost:3000'
     },
   },
 };
