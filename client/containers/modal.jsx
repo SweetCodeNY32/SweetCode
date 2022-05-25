@@ -19,7 +19,7 @@ const Modal = (props) => {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]); 
 
-
+  
   return(
     <div className="modal">
 
@@ -43,7 +43,7 @@ const Modal = (props) => {
       <Button 
         className="modal-category-button"
         variant="outlined"
-        onClick={() => setCategories(...categories, category)}
+        onClick={() => setCategories([...categories, category])}
       >Add Category</Button>
       {categories}
       </div>

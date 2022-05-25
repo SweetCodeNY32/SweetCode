@@ -57,7 +57,7 @@ const Home = (props) => {
       categories: categories
     };
 
-    await axios.post('', newGuide)
+    await axios.post('/api/studyguide/create', newGuide)
     setStudyGuides([...studyGuides, newGuide]);
   }
  
