@@ -1,0 +1,72 @@
+ul{
+  list-style-type: none;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home{
+  display: flex;
+}
+
+#sidebar-home{
+  max-width: 30%;
+  max-height: 100vh;
+  margin-right: 1em;
+}
+
+#sidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#sidebar-button, #sidebar-guides{
+  text-align: center;
+}
+
+#sidebar-intro{
+  border-bottom: 1px solid black;
+  padding-bottom: 1em;
+  width: 100%;
+}
+
+#study-guides-home{
+  flex: auto;
+  height: 100vh;
+  padding-left: 1em;
+  border-left: 1px solid black;
+}
+
+#study-guide-title{
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+.category-title{
+  width: 100%;
+  background-color: rgb(106, 106, 224);
+}
+
+.question{
+  display: flex;
+  justify-content: space-around;
+}
+
+.add-question, .add-category{
+  display: flex;
+  margin-top: 2em;
+
+}
+
+.question-text, .category-text{
+  flex: 3;
+}
+.question-button, .category-button{
+  flex: 1;
+  
+}

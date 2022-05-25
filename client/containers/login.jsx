@@ -5,10 +5,17 @@ import axios from 'axios';
 const Login = (props) => {
 
   async function handleLogin(){
-    const response = await axios.get('/api/login');
-    // let username = response.username;
+
+    //const response = await axios.get('/api/login');
+    // // let username = response.username;
+
+
     // // let userId = response.userId;
 
+    props.setUser({
+      username: "githubdude",
+      userId: '5'
+    })
     // props.setUser({
     //   username,
     //   userId

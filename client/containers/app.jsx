@@ -8,11 +8,10 @@ const App = () => {
   //will hold logic for react hooks to manage username and setting username
   const [user, setUser] = useState({
     username: '',
-    userId: 0
+    userId: '0'
   });
   
 
-  
   //if user is not currently signed in, will render the login page
   //login component will have access to setusername 
   if (user.username === ''){
