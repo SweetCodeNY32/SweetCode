@@ -26,10 +26,6 @@ const Sidebar = (props) => {
     setStudyGuides(props.studyGuideNames)
   },[props.studyGuideNames])
 
-  useEffect(()=> {
-    setStudyGuides(props.studyGuideNames)
-  },[props.studyGuideNames])
-
 
   const studyGuideArray = [];
   const studyGuideLength = studyGuides.length;
@@ -57,11 +53,11 @@ const Sidebar = (props) => {
           Create a new study guide 
         </Button>
         <NewStudyGuideModal open={open} handleClose={handleClose} handleSubmit={props.handleModalSubmit}/> 
-         {studyGuideArray}
-      <ul>
-        <li id="sidebar-button"><Button variant="text">Create a new study guide</Button></li> */}
-        
-      </ul>
+         <ul>
+           {studyGuideArray}
+         </ul>
+         
+
     </div>
 
   )

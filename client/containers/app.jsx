@@ -12,7 +12,7 @@ const App = () => {
     username: '',
     nodeId: '0'
   });
-
+  console.log('user', user);
   useEffect(() => {
     async function checkAuthentication() {
       let response = await axios.get('/api/checkauth')

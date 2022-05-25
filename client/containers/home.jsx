@@ -24,6 +24,7 @@ const fakeData = [
 const Home = (props) => {
   const username = props.user.username;
   const nodeId = props.user.nodeId;
+  console.log('this is the node id: ', nodeId);
 
   const [studyGuides, setStudyGuides] = useState(fakeData);
 
@@ -53,13 +54,14 @@ const Home = (props) => {
   async function handleModalSubmit(guideName, categories){
     guideName = guideName.replace(/\s/g, '-');
     const newGuide = {
+      userId: nodeId,
       name: guideName,
       categories: categories
     };
 
     //await axios.post('', newGuide)
     console.log('this is the new study guide added:', newGuide);
-    //await axios.post('/api/studyguide/create', newGuide)
+    await axios.post('/api/studyguide/create', newGuide)
     setStudyGuides([...studyGuides, newGuide]);
   }
  
