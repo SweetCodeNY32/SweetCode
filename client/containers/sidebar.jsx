@@ -11,6 +11,10 @@ const Sidebar = (props) => {
   const [studyGuides, setStudyGuides] = useState(props.studyGuideNames);
   const username = props.username;
   
+  useEffect(()=> {
+    setStudyGuides(props.studyGuideNames)
+  },[props.studyGuideNames])
+
   const studyGuideArray = [];
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i++){
