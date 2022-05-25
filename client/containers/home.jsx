@@ -28,9 +28,9 @@ const Home = (props) => {
   const [studyGuides, setStudyGuides] = useState(fakeData);
 
   async function fetchData(){
-    // let response = await axios.post('/api/studyguide', {
-    //   userId
-    // })
+    let response = await axios.post('/api/studyguide', {
+      userId
+    });
     // setStudyGuides(response);
     setStudyGuides(fakeData)
   }

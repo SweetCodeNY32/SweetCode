@@ -10,13 +10,21 @@ const clientId = process.env.CLIENT_ID;
 authController.getToken = async (req, res, next) => {
   const requestToken = req.query.code;
   const url = `https://github.com/login/oauth/access_token?client_id=d10f7d7ad9cf301504bc&client_secret=51ed70df07f3ed3d24393b95752902633d38208b&code=${requestToken}`;
+  const urlTwo = `https://api.github.com/user`;
   try {
     const response = await axios.post(url, {
       headers: { Accept: 'application/json', 'Content-Type': 'text/json' },
     });
     const accessToken = response.data.split('=')[1].split('&')[0];
     res.locals.accessToken = accessToken;
-    console.log('you are in getToken controller', res.locals.accessToken);
+    const responseTwo = await axios.get(urlTwo, {
+      headers: {
+        Authorization: 'token ' + accessToken,
+      },
+    });
+    res.locals.gh_username = responseTwo.data.login
+    res.locals.gh_node_id = responseTwo.data.node_id
+    // console.log('you are in getToken controller', res.locals.accessToken);
     return next();
   } catch (err) {
     return next({
@@ -31,7 +39,7 @@ authController.getToken = async (req, res, next) => {
 authController.getUser = async (req, res, next) => {
   const url = `https://api.github.com/user`;
   const accessToken = req.cookies.auth;
-  console.log(accessToken);
+  // console.log(accessToken);
   try {
     const response = await axios.get(url, {
       headers: {
