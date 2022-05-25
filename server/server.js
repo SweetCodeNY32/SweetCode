@@ -65,8 +65,9 @@ app.get('/api/checkauth', authController.getUser, (req, res) => {
 
 app.post(
   '/api/studyguide/create',
+  dbController.createStudyGuide,
   (req, res) => {
-    
+    return res.sendStatus(200);
   }
 )
 

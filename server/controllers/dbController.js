@@ -17,10 +17,12 @@ dbController.addNewUser = async (req, res, next) => {
   try {
     let queryString = `SELECT * FROM users WHERE users.gh_node_id = $1;`
     const dbResponse = await db.query(queryString, [res.locals.gh_node_id]);
+    // If the user does not exist, add them to the database.
     if (dbResponse.rows.length === 0) {
       queryString = `INSERT INTO users (gh_username, gh_node_id) values ($1, $2);`
       await db.query(queryString, [res.locals.gh_username, res.locals.gh_node_id]);
       console.log (`Successfully added ${res.locals.gh_username} into users database`);
+    // If the user does exist, update their gh_username (it might change)
     } else {
       queryString = `UPDATE users SET gh_username=$1 WHERE gh_node_id=$2;`;
       await db.query(queryString, [res.locals.gh_username, res.locals.gh_node_id]); 
@@ -45,7 +47,6 @@ dbController.getUserStudyGuides = async (req, res, next) => {
     let queryString = `SELECT _id FROM users WHERE gh_node_id=$1`
     let response = await db.query(queryString, [userId]);
     const id = response.rows[0]._id;
-    // console.log(response.rows);
     queryString = `SELECT * FROM study_guides WHERE user_id=$1;`
     response = await db.query(queryString, [id]);
     const studyGuides = response.rows;
@@ -85,6 +86,23 @@ dbController.getStudyGuideCategories = async (req, res, next) => {
   } catch (err) {
     return next({
       log: `Error in dbController.getStudyGuideCategories Err: ${err.message}`,
+      status: 500,
+      message: { err: 'An error occurred' },
+    });
+  }
+}
+
+/**
+ * Creates a new study guide based on the user's id.
+ */
+dbController.createStudyGuide = async (req, res, next) => {
+  const { userId } = req.body;
+  console.log(userId);
+  try {
+    return next();
+  } catch (err) {
+    return next({
+      log: `Error in dbController.createStudyGuide Err: ${err.message}`,
       status: 500,
       message: { err: 'An error occurred' },
     });
