@@ -2,20 +2,26 @@
 //will have a 'create a new study guide' and [+] button
 
 //will also have all of the other study guide names 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button'
 import {Link} from 'react-router-dom';
 
 const Sidebar = (props) => {
   //state that will hold the names of study guides in the side bar currently
-  const [studyGuides, setStudyGuides] = useState(props.studyGuideNames);
+  const [studyGuides, setStudyGuides] = useState([]);
   const username = props.username;
-  
+  console.log('props in sidebar: ', props);
+  console.log('studyguides in sidebar:', studyGuides);
+
+  useEffect(()=> {
+    setStudyGuides(props.studyGuideNames)
+  },[props.studyGuideNames])
+
   const studyGuideArray = [];
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i++){
     studyGuideArray.push(
-      <li className="sidebar-guides" key={`studyGuide${i}`}><Link to={`/${studyGuides[i]}`}>
+      <li className="sidebar-guides" key={`route${studyGuides[i]}`}><Link to={`/${studyGuides[i]}`}>
         <Button 
           variant="text" 
         >{studyGuides[i]}</Button>

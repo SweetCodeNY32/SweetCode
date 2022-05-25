@@ -28,26 +28,26 @@ const Home = (props) => {
   const [studyGuides, setStudyGuides] = useState(fakeData);
 
   async function fetchData(){
-    let response = await axios.post('/api/studyguide', {
-      userId
-    });
+    // let response = await axios.post('/api/studyguide', {
+    //   userId
+    // });
     // setStudyGuides(response);
     setStudyGuides(fakeData)
   }
   
   //will have useEffect logic to make fetch request to server for all of the study guides associated with this user 
-  useEffect(() => {
-    //getting study guides from studyguides endpoint
-    //expect response to be an array of objects:
-    // [
-    //   {
-    //     name:
-    //     categories: []
-    //   }
-    // ]
-    fetchData();
+  // useEffect(() => {
+  //   //getting study guides from studyguides endpoint
+  //   //expect response to be an array of objects:
+  //   // [
+  //   //   {
+  //   //     name:
+  //   //     categories: []
+  //   //   }
+  //   // ]
+  //   fetchData();
     
-  }, []);
+  // }, []);
 
   //handle logic for adding new study guides 
   async function handleModalSubmit(guideName, categories){
@@ -56,13 +56,11 @@ const Home = (props) => {
       name: guideName,
       categories: categories
     };
-
-    await axios.post('/api/studyguide/create', newGuide)
+    console.log('this is the new study guide added:', newGuide);
+    //await axios.post('/api/studyguide/create', newGuide)
     setStudyGuides([...studyGuides, newGuide]);
   }
  
-  console.log('in studyguides state: ',studyGuides);
-
   //iterating through the length of studyGuides 
   //creating an array of studyGuide objects and array of studyGuide names 
   const studyGuideLength = studyGuides.length;
