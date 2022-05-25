@@ -46,7 +46,7 @@ module.exports = {
   devServer: {
     port: 9000,
     compress: true,
-    // historyApiFallback: true,
+    historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, './client'),
     },

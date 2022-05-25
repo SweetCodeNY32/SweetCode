@@ -13,15 +13,15 @@ app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../client')));
 
-// app.get('/api/login', (req, res) => {
-//     return res.status(200).redirect(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
-//   });
+app.get('/', authController.logIn, (req, res) => {
+    return res.status(200).redirect(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
+  });
 
 app.get('/api/login', authController.logIn, (req, res) => {
     res.cookie('auth', res.locals.access_token);
     console.log('you are in api/login route')
     return res.status(201).json();
-})
+});
 
 app.get('/signup/github/callback', authController.getToken, authController.getUser, (req, res) => {
     res.cookie('auth', res.locals.access_token);

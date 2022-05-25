@@ -8,13 +8,15 @@ const clientID = process.env.CLIENT_ID;
 
 /*Middleware for /login */
 authController.logIn = async (req, res, next) => {
-  const url = `https://github.com/login/oauth/authorize?client_id=${clientID}&redirect_uri=http://localhost:3000/api/login&scope=read:user`;
+  const url = `https://github.com/login/oauth/authorize?client_id=${clientID}`;
+  res.redirect(`${url}`);
+  // const url = `https://github.com/login/oauth/authorize?client_id=${clientID}&redirect_uri=http://localhost:3000&scope=read:user`;
   try {
     const response = await axios.get(url);
     access_token = response.data.access_token;
     res.locals.accessToken = access_token;
     console.log("you are in login controller");
-    console.log("this is the response", response);
+    // console.log("this is the response", response);
     return next();
   } catch (err) {
     return next({
