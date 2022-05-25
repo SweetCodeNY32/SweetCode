@@ -20,6 +20,10 @@ const Login = (props) => {
     // let username = response.username;
     // // let userId = response.userId;
 
+    props.setUser({
+      username: "githubdude",
+      userId: '5'
+    })
     // props.setUser({
     //   username,
     //   userId
