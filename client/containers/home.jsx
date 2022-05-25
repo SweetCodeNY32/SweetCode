@@ -35,7 +35,7 @@ const Home = (props) => {
     // setStudyGuides(response);
     setStudyGuides(fakeData)
   }
-  
+  //update
   //will have useEffect logic to make fetch request to server for all of the study guides associated with this user 
   // useEffect(() => {
   //   //getting study guides from studyguides endpoint
