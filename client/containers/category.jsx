@@ -24,7 +24,6 @@ expecting props to be:
 
 const Category = (props) => {
   //variable to hold the value of the category name
-  console.log('this is props in Category: ', props)
   let categoryName = props.category;
   let questionsArray = props.questions;
   
@@ -39,6 +38,7 @@ const Category = (props) => {
         <Question 
           {...questionsArray[i]}
           category={categoryName} 
+          categoryIndex={props.categoryIndex}
           //handleNoteSubmit={handleNoteSubmit}
           id={`${categoryName}question${i}`}
         />
@@ -50,7 +50,7 @@ const Category = (props) => {
     <div className="category">
       <h3 className="category-title">{categoryName}</h3>
       <ul className="questions">{questions}</ul>
-      <AddQuestion category={categoryName} handleSubmit={props.handleQuestionSubmit} />
+      <AddQuestion category={categoryName} handleSubmit={props.handleQuestionSubmit} categoryIndex={props.categoryIndex}/>
     </div>
   )
 }

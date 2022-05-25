@@ -15,9 +15,8 @@ expecting props to be:
 */
 
 const AddQuestion = (props) => {
-  console.log('props at AddQuestion', props);
   const [question, setQuestion] = useState('');
-  const {category} = props;
+  const category = props.category;
   return( 
     <div className="add-question">
       <TextField
@@ -30,7 +29,7 @@ const AddQuestion = (props) => {
       <Button 
         className="question-button"
         variant="outlined"
-        onClick={() => props.handleSubmit(question, category)}
+        onClick={() => props.handleSubmit(question, category, props.categoryIndex)}
         >Add Question</Button>
     </div>
   )
