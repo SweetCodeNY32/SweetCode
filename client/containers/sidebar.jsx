@@ -2,7 +2,7 @@
 //will have a 'create a new study guide' and [+] button
 
 //will also have all of the other study guide names 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@mui/material/Button'
 import {Link} from 'react-router-dom';
 import Modal from '@mui/material/Modal';
@@ -48,7 +48,7 @@ const Sidebar = (props) => {
         >
           Create a new study guide 
         </Button>
-        <NewStudyGuideModal open={open} handleClose={handleClose}/> 
+        <NewStudyGuideModal open={open} handleClose={handleClose} handleSubmit={props.handleModalSubmit}/> 
          {studyGuideArray}
       {/* <ul>
         <li id="sidebar-button"><Button variant="text">Create a new study guide</Button></li> */}

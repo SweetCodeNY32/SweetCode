@@ -16,7 +16,7 @@ import Fade from '@mui/material/Fade';
 
 
 
-export default function NewStudyGuideModal ({ open, handleClose }) {
+export default function NewStudyGuideModal ({ open, handleClose, handleSubmit }) {
   const [guideName, setGuideName] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]); 
@@ -35,6 +35,15 @@ export default function NewStudyGuideModal ({ open, handleClose }) {
     p: 1
   };
 
+  const categoriesArray = []
+  for (let i = 0; i < categories.length; i++){
+    categoriesArray.push(
+      <li key={`categories${i}`}>
+        {categories[i]}
+      </li>
+    )
+  }
+
 
   return(
       <Modal sx={{display: 'flex', alignItems: 'center',justifyContent: 'center'}}
@@ -52,7 +61,7 @@ export default function NewStudyGuideModal ({ open, handleClose }) {
             <div className="modal">
 
               <div id="modal-add-guide">
-                <h2>Create a new study setGuideName</h2>
+                <h2>Create a new study name!</h2>
                 <TextField 
                 className="modal-guide-text"
                 variant="outlined" 
@@ -86,11 +95,7 @@ export default function NewStudyGuideModal ({ open, handleClose }) {
                 <Button 
                   className="modal-category-button"
                   variant="outlined"
-                  onClick={() => {
-                    props.handleSubmit(guideName, categories);
-                    setGuideName('');
-                    setCategories([]);
-                    }}
+                  onClick={() => handleSubmit(guideName, categories)}
                 >Submit</Button>
               </div>
 

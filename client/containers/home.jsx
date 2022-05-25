@@ -61,8 +61,8 @@ const Home = (props) => {
       categories: categories
     };
 
-    await axios.post('', newGuide)
-    setStudyGuides(...studyGuides, newGuide);
+    //await axios.post('', newGuide)
+    setStudyGuides([...studyGuides, newGuide]);
   }
 
   
@@ -121,6 +121,7 @@ const Home = (props) => {
          <Sidebar 
           username={username}
           studyGuideNames={studyGuideNames}
+          handleModalSubmit={handleModalSubmit}
          />
       </div>
       <div id='study-guides-home'>
@@ -129,7 +130,7 @@ const Home = (props) => {
         </Routes>
       </div>
       </BrowserRouter>
-      <Modal handleSubmit={handleModalSubmit}/>
+      {/* <Modal handleSubmit={handleModalSubmit}/> */}
     </div>
     
   )
