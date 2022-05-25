@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import image from '../assets/sweet-code.png'
 
 const Login = (props) => {
   // async function handleLogin() {
@@ -31,7 +32,7 @@ const Login = (props) => {
   return (
     <div className="login">
       <h1>Sweet Code</h1>
-
+      <img src={image} />
       <Button variant="outlined" href='https://github.com/login/oauth/authorize?client_id=d10f7d7ad9cf301504bc'>
         Log in with Github here!
       </Button>
