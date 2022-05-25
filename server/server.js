@@ -28,20 +28,32 @@ app.get('/api/login', async (req, res) => {
 
 // });
 
+// app.get()
+
 app.get(
   '/signin/github-callback',
   // authController.logIn,
   authController.getToken,
   // authController.checkForCookie,
-  authController.getUser,
+  // authController.getUser,
   async (req, res) => {
     res.cookie('auth', res.locals.accessToken);
     console.log('callback cookies', req.cookies);
-    console.log(res.locals.gh_username);
-    console.log(res.locals.gh_node_id);
+    // console.log(res.locals.gh_username);
+    // console.log(res.locals.gh_node_id);
     return res.status(200).redirect('http://localhost:9000/');
   }
 );
+
+app.get('/api/checkauth', authController.getUser, (req, res) => {
+  console.log('username:', res.locals.gh_username);
+  console.log('node_id:', res.locals.gh_node_id);
+  if (res.locals.gh_username) {
+    return res.status(200).json({username: res.locals.gh_username, node_id: res.locals.gh_node_id});
+  } else {
+    return res.sendStatus(401);
+  }
+})
 
 // app.get(
 //   '/api/getUserData',

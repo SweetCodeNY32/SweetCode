@@ -30,7 +30,8 @@ authController.getToken = async (req, res, next) => {
 // Using the access token, get a user's GitHub information (i.e. username, node_id)
 authController.getUser = async (req, res, next) => {
   const url = `https://api.github.com/user`;
-  const { accessToken } = res.locals;
+  const accessToken = req.cookies.auth;
+  console.log(accessToken);
   try {
     const response = await axios.get(url, {
       headers: {
@@ -41,11 +42,12 @@ authController.getUser = async (req, res, next) => {
     res.locals.gh_node_id = response.data.node_id
     return next();
   } catch (err) {
-    return next({
-      log: `Could not get user. Err: ${err.message}`,
-      status: 500,
-      message: { err: 'An error occurred' },
-    });
+    return next();
+    // return next({
+    //   log: `You're not logged in. Err: ${err.message}`,
+    //   status: 500,
+    //   message: { err: 'An error occurred' },
+    // });
   }
 };
 
