@@ -42,8 +42,6 @@ app.get(
 );
 
 app.get('/api/checkauth', authController.getUser, (req, res) => {
-  // console.log('username:', res.locals.gh_username);
-  // console.log('node_id:', res.locals.gh_node_id);
   if (res.locals.gh_username) {
     return res.status(200).json({username: res.locals.gh_username, node_id: res.locals.gh_node_id});
   } else {
@@ -51,24 +49,18 @@ app.get('/api/checkauth', authController.getUser, (req, res) => {
   }
 })
 
-// app.get(
-//   '/api/getUserData',
-  
-//   (req, res) => {
-//     // console.log('res.locals.github:', res.locals.github);
-//     return res.status(200).redirect('http://localhost:9000');
-//   }
-// );
-
-//Handles request when user logs in
-// app.use('/api/signin');
-
+// Creates a new study guide.
 app.post(
   '/api/studyguide/create',
   dbController.createStudyGuide,
   (req, res) => {
     return res.sendStatus(200);
   }
+)
+
+app.post(
+  '/api/studyguide/category',
+  
 )
 
 // Retrieves a user's study guides.
@@ -83,10 +75,17 @@ app.post(
   }
 );
 
-// //Adds new problems to the study guide
-// app.post('/api/problems', (req, res) => {
-//     return res.status(201).json()
-// });
+app.post(
+  '/api/problems/create',
+  (req, res) => {
+    return res.status(201).json();
+  }
+)
+
+// Retrieves problems from a user's specific study guide
+app.post('/api/problems', (req, res) => {
+    return res.status(201).json();
+});
 
 '/',
   (req, res) =>
