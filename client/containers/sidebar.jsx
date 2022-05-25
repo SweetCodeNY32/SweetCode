@@ -2,7 +2,7 @@
 //will have a 'create a new study guide' and [+] button
 
 //will also have all of the other study guide names 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@mui/material/Button'
 import {Link} from 'react-router-dom';
 import Modal from '@mui/material/Modal';
@@ -14,20 +14,24 @@ import Alert from '@mui/material/Alert';
 
 const Sidebar = (props) => {
   //state that will hold the names of study guides in the side bar currently
-  const [studyGuides, setStudyGuides] = useState(props.studyGuideNames);
+  const [studyGuides, setStudyGuides] = useState([]);
   const username = props.username;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  console.log('props in sidebar: ', props);
+  console.log('studyguides in sidebar:', studyGuides);
 
-  console.log('your study guides:', studyGuides);
+  useEffect(()=> {
+    setStudyGuides(props.studyGuideNames)
+  },[props.studyGuideNames])
 
-  
+
   const studyGuideArray = [];
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i++){
     studyGuideArray.push(
-      <li className="sidebar-guides" key={`studyGuide${i}`}><Link to={`/${studyGuides[i]}`}>
+      <li className="sidebar-guides" key={`route${studyGuides[i]}`}><Link to={`/${studyGuides[i]}`}>
         <Button 
           variant="text" 
         >{studyGuides[i]}</Button>
@@ -48,13 +52,14 @@ const Sidebar = (props) => {
         >
           Create a new study guide 
         </Button>
-        <NewStudyGuideModal open={open} handleClose={handleClose}/> 
-         {studyGuideArray}
-      {/* <ul>
-        <li id="sidebar-button"><Button variant="text">Create a new study guide</Button></li> */}
-        
-      {/* </ul> */}
+        <NewStudyGuideModal open={open} handleClose={handleClose} handleSubmit={props.handleModalSubmit}/> 
+         <ul>
+           {studyGuideArray}
+         </ul>
+         
+
     </div>
+
   )
 }
 

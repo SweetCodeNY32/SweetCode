@@ -4,32 +4,29 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Login = (props) => {
-  async function handleLogin() {
-    console.log('button clicked');
+  // async function handleLogin() {
+  //   // response = await axios.get(
+  //   //   '/api/checkauth'
+  //   // );
+  //   // props.setUser({
+  //   //   username: res.locals.gh_username,
+  //   //   userId:res.locals.gh_node_id
+  //   // })
 
-    
-    // response = await axios.get(
-    //   '/api/checkauth'
-    // );
-    // props.setUser({
-    //   username: res.locals.gh_username,
-    //   userId:res.locals.gh_node_id
-    // })
+  //   // console.log(response);
+  //   // let username = response.username;
+  //   // // let userId = response.userId;
 
-    // console.log(response);
-    // let username = response.username;
-    // // let userId = response.userId;
-
-    props.setUser({
-      username: "githubdude",
-      userId: '5'
-    })
-    // props.setUser({
-    //   username,
-    //   userId
-    // });
-    // href='https://github.com/login/oauth/authorize?client_id=d10f7d7ad9cf301504bc'
-  }
+  //   props.setUser({
+  //     username: "githubdude",
+  //     nodeId: '5'
+  //   })
+  //   // props.setUser({
+  //   //   username,
+  //   //   userId
+  //   // });
+  //   // href='https://github.com/login/oauth/authorize?client_id=d10f7d7ad9cf301504bc'
+  // }
 
   return (
     <div className="login">

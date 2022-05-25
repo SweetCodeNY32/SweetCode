@@ -70,3 +70,8 @@ ul{
   flex: 1;
   
 }
+
+#modal-category{
+  display: flex;
+  flex-direction: column;
+}

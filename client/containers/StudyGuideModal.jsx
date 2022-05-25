@@ -16,7 +16,7 @@ import Fade from '@mui/material/Fade';
 
 
 
-export default function NewStudyGuideModal ({ open, handleClose }) {
+export default function NewStudyGuideModal ({ open, handleClose, handleSubmit }) {
   const [guideName, setGuideName] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]); 
@@ -35,6 +35,15 @@ export default function NewStudyGuideModal ({ open, handleClose }) {
     p: 1
   };
 
+  const categoriesArray = []
+  for (let i = 0; i < categories.length; i++){
+    categoriesArray.push(
+      <li key={`categories${i}`}>
+        {categories[i]}
+      </li>
+    )
+  }
+
 
   return(
       <Modal sx={{display: 'flex', alignItems: 'center',justifyContent: 'center'}}
@@ -49,14 +58,48 @@ export default function NewStudyGuideModal ({ open, handleClose }) {
         >
         <Fade in={open}>
           <Box sx={style}> 
-            <TextField 
-              className="modal-category-text"
-              variant="outlined" 
-              label="Add category here"
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              {guideName}
-            </TextField> 
+            <div className="modal">
+
+              <div id="modal-add-guide">
+                <h2>Create a new study name!</h2>
+                <TextField 
+                className="modal-guide-text"
+                variant="outlined" 
+                label="Add study guide name here"
+                onChange={(e) => setGuideName(e.target.value)}
+                >{guideName}</TextField>
+              </div>
+
+              <div id="modal-category">
+                <TextField 
+                className="modal-category-text"
+                variant="outlined" 
+                label="Add category here"
+                onChange={(e) => setCategory(e.target.value)}
+                >{guideName}</TextField>
+              <Button 
+                className="modal-category-button"
+                variant="outlined"
+                onClick={() => {
+                  setCategories([...categories, category]);
+                  setCategory('');
+                  }}
+              >Add Category</Button>
+              <ul>
+                {categoriesArray}
+              </ul>
+
+              </div>
+
+              <div id="modal-submit">
+                <Button 
+                  className="modal-category-button"
+                  variant="outlined"
+                  onClick={() => handleSubmit(guideName, categories)}
+                >Submit</Button>
+              </div>
+
+            </div>
           </Box>
         </Fade>
       </Modal>   
@@ -72,24 +115,67 @@ export default function NewStudyGuideModal ({ open, handleClose }) {
 //     "categories": ["Binary Search Trees", "Matrices"]
 //  }
 
-      {/* <div id="modal-category">
+      {/* const Modal = (props) => {
+  const [guideName, setGuideName] = useState('');
+  const [category, setCategory] = useState('');
+  const [categories, setCategories] = useState([]); 
+
+  const categoriesArray = []
+  for (let i = 0; i < categories.length; i++){
+    categoriesArray.push(
+      <li key={`categories${i}`}>
+        {categories[i]}
+      </li>
+    )
+  }
+
+  return(
+    <div className="modal">
+
+      <div id="modal-add-guide">
+        <h2>Create a new study setGuideName</h2>
+        <TextField 
+        className="modal-guide-text"
+        variant="outlined" 
+        label="Add study guide name here"
+        onChange={(e) => setGuideName(e.target.value)}
+        >{guideName}</TextField>
+      </div>
+
+      <div id="modal-category">
         <TextField 
         className="modal-category-text"
         variant="outlined" 
-        label="Add categoru here"
+        label="Add category here"
         onChange={(e) => setCategory(e.target.value)}
         >{guideName}</TextField>
       <Button 
         className="modal-category-button"
         variant="outlined"
-        onClick={() => setCategories(...categories, category)}
+        onClick={() => {
+          setCategories([...categories, category]);
+          setCategory('');
+          }}
       >Add Category</Button>
-      {categories}
+      <ul>
+        {categoriesArray}
+      </ul>
+      
       </div>
+
       <div id="modal-submit">
         <Button 
           className="modal-category-button"
           variant="outlined"
-          onClick={() => props.handleSubmit(guideName, categories)}
+          onClick={() => {
+            props.handleSubmit(guideName, categories);
+            setGuideName('');
+            setCategories([]);
+            }}
         >Submit</Button>
-      </div> */}
+      </div>
+
+    </div>
+  );
+}
+ */}
