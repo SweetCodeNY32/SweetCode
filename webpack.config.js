@@ -46,12 +46,13 @@ module.exports = {
   devServer: {
     port: 9000,
     compress: true,
-    // historyApiFallback: true,
+    historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, './client'),
     },
     proxy: {
       '/api': 'http://localhost:3000',
+      // '/signin/github-callback': 'http://localhost:3000'
     },
   },
 };
