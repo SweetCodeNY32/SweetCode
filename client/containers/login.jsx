@@ -31,9 +31,9 @@ const Login = (props) => {
 
   return (
     <div className="login">
-      <h1>Sweet Code</h1>
-      <img src={image} />
-      <Button variant="outlined" href='https://github.com/login/oauth/authorize?client_id=d10f7d7ad9cf301504bc'>
+      <img id="login-image" src="../sweet-code.png" alt="sweet-code-logo" />
+
+      <Button id="login-button" variant="contained" href='https://github.com/login/oauth/authorize?client_id=d10f7d7ad9cf301504bc'>
         Log in with Github here!
       </Button>
     </div>
