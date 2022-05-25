@@ -28,10 +28,9 @@ const Home = (props) => {
 
 
   async function fetchData(){
-    // let response = await axios.post('/api/studyguide', {
-    //   userId,
-    //   username
-    // })
+    let response = await axios.post('/api/studyguide', {
+      userId
+    });
     // setStudyGuides(response);
     setStudyGuides(fakeData)
   }
