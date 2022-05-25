@@ -56,13 +56,10 @@ const Home = (props) => {
       name: guideName,
       categories: categories
     };
-<<<<<<< HEAD
 
     //await axios.post('', newGuide)
-=======
     console.log('this is the new study guide added:', newGuide);
     //await axios.post('/api/studyguide/create', newGuide)
->>>>>>> alex/db-endpoints
     setStudyGuides([...studyGuides, newGuide]);
   }
  
