@@ -75,3 +75,11 @@ ul{
   display: flex;
   flex-direction: column;
 }
+
+#login-button{
+  margin-top: 1em;
+}
+
+#login-image{
+  margin-top: 1em;
+}

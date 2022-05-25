@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import image from '../assets/sweet-code.png'
 
 const Login = (props) => {
   // async function handleLogin() {

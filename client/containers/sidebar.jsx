@@ -26,7 +26,6 @@ const Sidebar = (props) => {
     setStudyGuides(props.studyGuideNames)
   },[props.studyGuideNames])
 
-
   const studyGuideArray = [];
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i++){

@@ -51,7 +51,10 @@ const Modal = (props) => {
       <Button 
         className="modal-category-button"
         variant="outlined"
-        onClick={() => setCategories([...categories, category])}
+        onClick={() => {
+          setCategories([...categories, category]);
+          setCategory('');
+          }}
       >Add Category</Button>
       <ul>
         {categoriesArray}
@@ -63,7 +66,11 @@ const Modal = (props) => {
         <Button 
           className="modal-category-button"
           variant="outlined"
-          onClick={() => props.handleSubmit(guideName, categories)}
+          onClick={() => {
+            props.handleSubmit(guideName, categories);
+            setGuideName('');
+            setCategories([]);
+            }}
         >Submit</Button>
       </div>
 
