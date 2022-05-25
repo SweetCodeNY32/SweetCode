@@ -53,11 +53,12 @@ const Home = (props) => {
   async function handleModalSubmit(guideName, categories){
     guideName = guideName.replace(/\s/g, '-');
     const newGuide = {
+      userId: nodeId,
       name: guideName,
       categories: categories
     };
 
-    await axios.post('', newGuide)
+    //await axios.post('/api/studyguide/add', newGuide)
     setStudyGuides([...studyGuides, newGuide]);
   }
  

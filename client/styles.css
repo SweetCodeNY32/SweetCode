@@ -70,3 +70,7 @@ ul{
   flex: 1;
   
 }
+
+.modal{
+  padding: 1em;
+}

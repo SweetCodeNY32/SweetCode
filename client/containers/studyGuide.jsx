@@ -118,14 +118,12 @@ const StudyGuide = (props) => {
     //will look to get the same data as fetch data
 
     const deepCopyObj = JSON.parse(JSON.stringify(studyGuide));
-    console.log('this is the deepcopy object before push:', deepCopyObj);
 
     deepCopyObj.push({
       category: category,
       questions: []
     })
 
-    console.log('this is the deepcopy object after push:', deepCopyObj);
     setStudyGuide(deepCopyObj);
   }
 
@@ -143,12 +141,11 @@ const StudyGuide = (props) => {
     categoryObj.questions.push({
       question: question
     })
-    
 
     setStudyGuide(deepCopyObj);
   }
 
-  console.log('study guide: ', studyGuide);
+  console.log('study guide in ', studyGuideName, studyGuide);
 
 
   //creating different categories to render based on the study guide 
