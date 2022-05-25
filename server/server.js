@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const authController = require('./controllers/authController');
 require('dotenv').config
+const clientID = process.env.CLIENT_ID;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -12,16 +13,26 @@ app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../client')));
 
+// app.get('/api/login', (req, res) => {
+//     return res.status(200).redirect(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
+//   });
+
 app.get('/api/login', authController.logIn, (req, res) => {
+    res.cookie('auth', res.locals.access_token);
     console.log('you are in api/login route')
     return res.status(201).json();
 })
 
-app.get('/signin/github-callback', authController.getToken, authController.getUser, (req, res) => {
-    res.cookie('auth', res.locals.accessToken);
-    console.log('you are in /signin/github callback route')
-    return res.status(200).redirect('http://localhost:9000'); 
-})
+app.get('/signup/github/callback', authController.getToken, authController.getUser, (req, res) => {
+    res.cookie('auth', res.locals.access_token);
+    console.log('callback cookies', req.cookies);
+    return res.status(200).redirect('http://localhost:3000');
+  });
+  
+  app.get('/api/getUserData', authController.checkForCookie, authController.getUser, (req, res) => {
+    console.log(res.locals.github)
+    return res.status(200).send(res.locals.github);
+  })
 
 //Handles request when user logs in
 // app.use('/api/signin');
