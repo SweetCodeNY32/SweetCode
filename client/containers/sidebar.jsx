@@ -22,7 +22,11 @@ const Sidebar = (props) => {
 
   console.log('your study guides:', studyGuides);
 
-  
+  useEffect(()=> {
+    setStudyGuides(props.studyGuideNames)
+  },[props.studyGuideNames])
+
+
   const studyGuideArray = [];
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i++){
