@@ -21,7 +21,8 @@ const Modal = (props) => {
 
 
   return(
-    <div class="modal">
+    <div className="modal">
+
       <div id="modal-add-guide">
         <h2>Create a new study setGuideName</h2>
         <TextField 
@@ -31,6 +32,7 @@ const Modal = (props) => {
         onChange={(e) => setGuideName(e.target.value)}
         >{guideName}</TextField>
       </div>
+
       <div id="modal-category">
         <TextField 
         className="modal-category-text"
@@ -45,6 +47,7 @@ const Modal = (props) => {
       >Add Category</Button>
       {categories}
       </div>
+
       <div id="modal-submit">
         <Button 
           className="modal-category-button"

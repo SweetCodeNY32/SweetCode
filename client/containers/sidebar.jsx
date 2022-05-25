@@ -10,9 +10,6 @@ const Sidebar = (props) => {
   //state that will hold the names of study guides in the side bar currently
   const [studyGuides, setStudyGuides] = useState(props.studyGuideNames);
   const username = props.username;
-
-  console.log('your study guides:', studyGuides);
-
   
   const studyGuideArray = [];
   const studyGuideLength = studyGuides.length;
@@ -37,7 +34,7 @@ const Sidebar = (props) => {
         <li id="sidebar-button"><Button variant="text">Create a new study guide</Button></li>
         {studyGuideArray}
       </ul>
-    </div>
+    </div> 
   )
 }
 

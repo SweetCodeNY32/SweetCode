@@ -10,7 +10,7 @@ const App = () => {
   //will hold logic for react hooks to manage username and setting username
   const [user, setUser] = useState({
     username: '',
-    userId: '0'
+    nodeId: '0'
   });
 
   useEffect(() => {
@@ -20,12 +20,12 @@ const App = () => {
       if(response.status === 200){
         setUser({
           username: response.data.username, 
-          userId: response.data.node_id
+          nodeId: response.data.node_id
         })
       } else { 
         setUser({
           username: '', 
-          userId: '0' 
+          nodeId: '0' 
         })
       }
     }
