@@ -8,6 +8,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 
 // setUser({
 //   username: '',
@@ -34,15 +35,23 @@ export default function LoginStatus({ username, avatarUrl, setUser }) {
         alignItems: 'center',
       }}
     >
+      <Tooltip title="Logout" arrow>
+        <Button
+          onClick={handleLogout}
+          sx={{
+            maxWidth: '24px',
+            maxHeight: '24px',
+            minWidth: '24px',
+            minHeight: '24px',
+          }}
+        >
+          <ArrowBackIosNewRoundedIcon fontSize="small" />
+        </Button>
+      </Tooltip>
       <Avatar alt={username} src={avatarUrl} />
       <Typography>
         {username}
       </Typography>
-      <Button
-        onClick={handleLogout}
-      >
-        Logout
-      </Button>
     </Box>
   );
 }
