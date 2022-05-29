@@ -52,7 +52,14 @@ export default function App() {
     >
       {user.username === ''
         ? <LoginPage />
-        : <HomePage username={user.username} nodeId={user.nodeId} avatarUrl={user.avatarUrl} />}
+        : (
+          <HomePage
+            username={user.username}
+            nodeId={user.nodeId}
+            avatarUrl={user.avatarUrl}
+            setUser={setUser}
+          />
+        )}
     </Box>
   );
 }

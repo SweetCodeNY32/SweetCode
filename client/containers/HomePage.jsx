@@ -23,7 +23,7 @@ const fakeData = [
 
 // TODO: add props validation
 // eslint-disable-next-line react/prop-types
-export default function HomePage({ username, nodeId, avatarUrl }) {
+export default function HomePage({ username, nodeId, avatarUrl, setUser }) {
   const [studyGuides, setStudyGuides] = useState(fakeData);
 
   // TODO: rather than use hard-coded dummy data, fetch data from the database
@@ -89,6 +89,7 @@ export default function HomePage({ username, nodeId, avatarUrl }) {
           username={username}
           nodeId={nodeId}
           avatarUrl={avatarUrl}
+          setUser={setUser}
           studyGuideNames={studyGuideNames}
         />
         <Divider orientation="vertical" />

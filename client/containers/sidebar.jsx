@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -15,8 +16,13 @@ import NewStudyGuideModal from './StudyGuideModal';
 import LoginStatus from './LoginStatus';
 
 // TODO: add props validation
-// eslint-disable-next-line react/prop-types
-export default function Sidebar({ username, nodeId, avatarUrl, studyGuideNames }) {
+export default function Sidebar({
+  username,
+  nodeId,
+  avatarUrl,
+  setUser,
+  studyGuideNames,
+}) {
   // state that will hold the names of study guides in the side bar currently
   const [studyGuides, setStudyGuides] = useState([]);
 
@@ -103,7 +109,11 @@ export default function Sidebar({ username, nodeId, avatarUrl, studyGuideNames }
         />
       </Box>
       <Divider orientation="horizontal" />
-      <LoginStatus username={username} avatarUrl={avatarUrl} />
+      <LoginStatus
+        username={username}
+        avatarUrl={avatarUrl}
+        setUser={setUser}
+      />
     </Box>
   );
 }
