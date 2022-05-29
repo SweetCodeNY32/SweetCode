@@ -12,7 +12,7 @@ import { Box, Backdrop } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 
-const Sidebar = (props) => {
+export default function Sidebar(props) {
   //state that will hold the names of study guides in the side bar currently
   const [studyGuides, setStudyGuides] = useState([]);
   const username = props.username;
@@ -30,11 +30,15 @@ const Sidebar = (props) => {
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i++){
     studyGuideArray.push(
-      <li className="sidebar-guides" key={`route${studyGuides[i]}`}><Link to={`/${studyGuides[i]}`}>
-        <Button 
-          variant="text" 
-        >{studyGuides[i]}</Button>
-      </Link></li>
+      <li className="sidebar-guides" key={`route${studyGuides[i]}`}>
+        <Link to={`/${studyGuides[i]}`}>
+          <Button 
+            variant="text" 
+          >
+            {studyGuides[i]}
+          </Button>
+        </Link>
+      </li>
 
       /* <li key={`studyGuideSidebar${i}`}>
         <Button variant="text">{studyGuides[i]}</Button>
@@ -43,7 +47,7 @@ const Sidebar = (props) => {
   }
 
   return(
-    <div id='sidebar'>
+    <Box id='sidebar'>
       <h3 id="sidebar-intro">Hey {username}, here are your study guides!</h3>
         <Button
           onClick={handleOpen}
@@ -52,14 +56,10 @@ const Sidebar = (props) => {
           Create a new study guide 
         </Button>
         <NewStudyGuideModal open={open} handleClose={handleClose} handleSubmit={props.handleModalSubmit}/> 
-         <ul>
-           {studyGuideArray}
-         </ul>
+        {studyGuideArray}
          
 
-    </div>
+    </Box>
 
   )
 }
-
-export default Sidebar;

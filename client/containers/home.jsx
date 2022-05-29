@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar.jsx';
 import StudyGuide from './StudyGuide.jsx';
-import Modal from './StudyGuideModal.jsx';
 import {BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 
