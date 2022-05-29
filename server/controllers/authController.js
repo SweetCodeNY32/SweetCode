@@ -10,7 +10,7 @@ const clientId = process.env.CLIENT_ID;
 authController.getToken = async (req, res, next) => {
   const requestToken = req.query.code;
   const url = `https://github.com/login/oauth/access_token?client_id=d10f7d7ad9cf301504bc&client_secret=51ed70df07f3ed3d24393b95752902633d38208b&code=${requestToken}`;
-  const urlTwo = `https://api.github.com/user`;
+  const urlTwo = 'https://api.github.com/user';
   try {
     const response = await axios.post(url, {
       headers: { Accept: 'application/json', 'Content-Type': 'text/json' },
@@ -19,11 +19,11 @@ authController.getToken = async (req, res, next) => {
     res.locals.accessToken = accessToken;
     const responseTwo = await axios.get(urlTwo, {
       headers: {
-        Authorization: 'token ' + accessToken,
+        Authorization: `token ${accessToken}`,
       },
     });
-    res.locals.gh_username = responseTwo.data.login
-    res.locals.gh_node_id = responseTwo.data.node_id
+    res.locals.gh_username = responseTwo.data.login;
+    res.locals.gh_node_id = responseTwo.data.node_id;
     // console.log('you are in getToken controller', res.locals.accessToken);
     return next();
   } catch (err) {
@@ -37,25 +37,22 @@ authController.getToken = async (req, res, next) => {
 
 // Using the access token, get a user's GitHub information (i.e. username, node_id)
 authController.getUser = async (req, res, next) => {
-  const url = `https://api.github.com/user`;
+  const url = 'https://api.github.com/user';
   const accessToken = req.cookies.auth;
   // console.log(accessToken);
   try {
     const response = await axios.get(url, {
       headers: {
-        Authorization: 'token ' + accessToken,
+        Authorization: `token ${accessToken}`,
       },
     });
-    res.locals.gh_username = response.data.login
-    res.locals.gh_node_id = response.data.node_id
+    console.log(response);
+    res.locals.gh_username = response.data.login;
+    res.locals.gh_node_id = response.data.node_id;
+    res.locals.gh_avatar_url = response.data.avatar_url;
     return next();
   } catch (err) {
     return next();
-    // return next({
-    //   log: `You're not logged in. Err: ${err.message}`,
-    //   status: 500,
-    //   message: { err: 'An error occurred' },
-    // });
   }
 };
 
@@ -82,7 +79,7 @@ authController.getUser = async (req, res, next) => {
 //   }
 // };
 
-/*Middleware for checking if cookie is there */
+/* Middleware for checking if cookie is there */
 authController.checkForCookie = async (req, res, next) => {
   try {
     if (!req.cookies.auth) {
@@ -98,7 +95,5 @@ authController.checkForCookie = async (req, res, next) => {
     });
   }
 };
-
-
 
 module.exports = authController;

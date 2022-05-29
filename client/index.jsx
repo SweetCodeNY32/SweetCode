@@ -7,7 +7,7 @@ import './styles.css';
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
       main: '#FF5757',
     },

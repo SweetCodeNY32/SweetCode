@@ -39,7 +39,7 @@ ul{
   flex: auto;
   height: 100vh;
   padding-left: 1em;
-  border-left: 1px solid black;
+  /* border-left: 1px solid black; */
 }
 
 #study-guide-title{

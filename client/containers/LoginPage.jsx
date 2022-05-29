@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Tooltip } from '@mui/material';
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <Box
       id="login-page"
