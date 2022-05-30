@@ -10,7 +10,6 @@ import React from 'react';
 import {
   Box,
   Checkbox,
-  Divider,
   Link,
   TextField,
   Typography,
@@ -74,6 +73,7 @@ export default function Question({
     <Box
       className="single-question"
       sx={{
+        p: 1,
         display: 'flex',
         width: '100%',
         alignItems: 'center',
@@ -90,7 +90,22 @@ export default function Question({
       >
         <Link href={link}>{question}</Link>
       </Box>
-      {generateDifficultyComponent(difficulty)}
+      <Box
+        sx={{
+          display: 'flex',
+          flexGrow: 1,
+        }}
+      >
+        {generateDifficultyComponent(difficulty)}
+      </Box>
+      {/* TODO: make controlled component */}
+      <TextField
+        label="Notes"
+        size="small"
+        variant="standard"
+        multiline
+        maxRows={4}
+      />
       {/* <TextField
         class='question-notes'
         label='Notes'

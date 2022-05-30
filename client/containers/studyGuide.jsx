@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 // Import local components
 import Category from './Category';
-import AddCategory from '../components/addCategory';
+import AddCategory from '../components/AddCategory';
 
 /*
 props = {
@@ -186,7 +186,13 @@ export default function StudyGuide(props) {
       </Typography>
       <Divider orientation="horizontal" />
       {categoryArray}
-      <AddCategory handleSubmit={handleCategorySubmit}/>
+      <Box
+        sx={{
+          p: 1,
+        }}
+      >
+        <AddCategory handleSubmit={handleCategorySubmit}/>
+      </Box>
     </Box>
-  )
+  );
 }

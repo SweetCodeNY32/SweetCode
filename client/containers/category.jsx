@@ -19,7 +19,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // Import local components
 import Question from '../components/Question';
-import AddQuestion from '../components/addQuestion';
+import AddQuestion from '../components/AddQuestion';
 
 /*
 expecting props to be:
@@ -84,7 +84,6 @@ export default function Category({
           />
         </AccordionDetails>
       </Accordion>
-      {questionComponents}
     </Box>
   );
 }
