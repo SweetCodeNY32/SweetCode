@@ -34,7 +34,7 @@ export default function Sidebar({
       name: formattedGuideName,
       categories,
     };
-    console.log('this is the new study guide added:', newGuide);
+    // console.log('this is the new study guide added:', newGuide);
     await axios.post('/api/studyguide/create', newGuide);
     setStudyGuides([...studyGuides, newGuide]);
   };
@@ -43,7 +43,7 @@ export default function Sidebar({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log('studyguides in sidebar:', studyGuides);
+  // console.log('studyguides in sidebar:', studyGuides);
 
   useEffect(() => {
     setStudyGuides(studyGuideNames);
@@ -53,16 +53,6 @@ export default function Sidebar({
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i += 1) {
     studyGuideArray.push(
-    //   <Link
-    //   key={`route${studyGuides[i]}`}
-    //   to={`/${studyGuides[i]}`}
-    // >
-    //   <Button
-    //     variant="contained"
-    //   >
-    //     {studyGuides[i]}
-    //   </Button>
-    // </Link>,
       <Link
         key={`route${studyGuides[i]}`}
         to={`/${studyGuides[i]}`}
@@ -72,8 +62,10 @@ export default function Sidebar({
       >
         <Button
           variant="text"
+          size="small"
           sx={{
-            m: 0.5,
+            width: '100%',
+            my: 0.5,
           }}
         >
           {studyGuides[i]}
@@ -90,6 +82,7 @@ export default function Sidebar({
         width: '20%',
       }}
     >
+      {/* Header for sidebar */}
       <Typography
         variant="h5"
         align="center"
@@ -100,6 +93,7 @@ export default function Sidebar({
         Study Guides
       </Typography>
       <Divider orientation="horizontal" />
+      {/* Contains the list of study guides a user has */}
       <Box
         id="study-guides"
         sx={{
@@ -116,7 +110,7 @@ export default function Sidebar({
             size="small"
             variant="contained"
             sx={{
-              m: 0.5,
+              my: 0.5,
             }}
           >
             <AddRoundedIcon />
@@ -129,6 +123,7 @@ export default function Sidebar({
         />
       </Box>
       <Divider orientation="horizontal" />
+      {/* Login status for the user. Also contains logout logic and "about" for SwellCode */}
       <LoginStatus
         username={username}
         avatarUrl={avatarUrl}

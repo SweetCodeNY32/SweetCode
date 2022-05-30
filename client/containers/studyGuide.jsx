@@ -150,7 +150,7 @@ export default function StudyGuide(props) {
 
   console.log('study guide in ', studyGuideName, studyGuide);
 
-  // creating different categories to render based on the study guide 
+  // creating different categories to render based on the study guide
   const categoryArray = [];
   const categoryLength = studyGuide.length;
   for (let i = 0; i < categoryLength; i += 1) {

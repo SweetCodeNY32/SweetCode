@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 // Import MUI components
 import { Box, Divider } from '@mui/material';
 // Import local components
