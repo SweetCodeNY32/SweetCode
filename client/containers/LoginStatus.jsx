@@ -113,6 +113,7 @@ export default function LoginStatus({ username, avatarUrl, setUser }) {
       >
         <GitHubButton
           href="https://github.com/SweetCodeNY32/SweetCode"
+          data-color-scheme="no-preference: dark; light: light; dark: dark;"
           data-icon="octicon-star"
           data-show-count="true"
           aria-label="Star SweetCodeNY32/SweetCode on GitHub"
