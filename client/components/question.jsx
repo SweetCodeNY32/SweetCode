@@ -1,12 +1,19 @@
-//a title of the container, which is the category name 
-//check box, based on status
-//will have name, with link to the actual question using the slug name 
-//will also have difficulty and notes section 
+// TODO: add props validation
+/* eslint-disable react/prop-types */
+// a title of the container, which is the category name
+// check box, based on status
+// will have name, with link to the actual question using the slug name
+// will also have difficulty and notes section
 
 import React from 'react';
-import Checkbox from '@mui/material/Checkbox';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+// Import MUI components
+import {
+  Box,
+  Checkbox,
+  Link,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 /*
 expecting props to be:
@@ -19,24 +26,86 @@ expecting props to be:
 }
 */
 
-const Question = (props) => {
-  const question = props.question;
-  const link = `https://www.leetcode.com/problems/${props.questionslug}`;
-  const difficulty = props.difficulty;
-  const status = props.status === 'ac' ? true : false;
-  // const notes = props.notes;
-  const questionKey = props.key;
+export default function Question({
+  question,
+  questionslug,
+  difficulty,
+  status,
+  // notes,
+}) {
+  const link = `https://www.leetcode.com/problems/${questionslug}`;
+  const progress = status === 'ac';
+  const generateDifficultyComponent = (problemDifficulty) => {
+    let color;
+    let text;
+    switch (problemDifficulty) {
+      case 'easy':
+        color = '#00FF00';
+        text = 'easy';
+        break;
+      case 'medium':
+        color = '#FFFF00';
+        text = 'medium';
+        break;
+      case 'hard':
+        color = '#FF0000';
+        text = 'hard';
+        break;
+      default:
+        color = '#808080';
+        text = 'unknown';
+    }
+    return (
+      <Typography
+        variant="button"
+        color={color}
+      >
+        {text}
+      </Typography>
+    );
+  };
+  // const questionKey = key;
 
-  //react hook state to keep track of each questions notes
+  // react hook state to keep track of each questions notes
   // const [note, setNote] = useState(notes)
 
-  return(
-    <div className="question">
-      {status
-        ? <Checkbox className="checkbox" checked/>
-        : <Checkbox className="checkbox"/>}
-      <a className="link" href={link}>{question}</a>
-      <p className="difficulty">{difficulty}</p>
+  return (
+    <Box
+      className="single-question"
+      sx={{
+        p: 1,
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center',
+      }}
+    >
+      {progress
+        ? <Checkbox className="checkbox" checked disableRipple size="small" />
+        : <Checkbox className="checkbox" disableRipple size="small" />}
+      <Box
+        sx={{
+          display: 'flex',
+          width: '30%',
+        }}
+      >
+        <Link href={link}>{question}</Link>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexGrow: 1,
+        }}
+      >
+        {generateDifficultyComponent(difficulty)}
+      </Box>
+      {/* TODO: make controlled component */}
+      <TextField
+        label="Notes"
+        size="small"
+        variant="standard"
+        multiline
+        maxRows={4}
+      />
       {/* <TextField
         class='question-notes'
         label='Notes'
@@ -45,14 +114,11 @@ const Question = (props) => {
         value={note}
         onChange={(e) => setNote(e.target.value)}
       />
-      <Button 
+      <Button
         class="save-question-buttom"
         variant="outlined"
         onClick={(note, questionKey) => props.handleNoteSubmit(note, questionKey)}
         >Add Question</Button> */}
-    </div>
-  )
+    </Box>
+  );
 }
-
-
-export default Question;

@@ -17,8 +17,7 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 
 app.get('/api/login', async (req, res) => {
   // const url = `https://github.com/login/oauth/authorize?client_id=${clientId}`
-  const url =
-    'https://github.com/login/oauth/authorize?client_id=d10f7d7ad9cf301504bc';
+  const url = 'https://github.com/login/oauth/authorize?client_id=d10f7d7ad9cf301504bc';
   console.log('this is doing something?');
   return res.redirect(url);
 });
@@ -29,7 +28,6 @@ app.get('/api/login', async (req, res) => {
 //     return res.status(201).json();
 
 // });
-
 
 app.get(
   '/signin/github-callback',
@@ -43,11 +41,14 @@ app.get(
 
 app.get('/api/checkauth', authController.getUser, (req, res) => {
   if (res.locals.gh_username) {
-    return res.status(200).json({username: res.locals.gh_username, node_id: res.locals.gh_node_id});
-  } else {
-    return res.sendStatus(401);
+    return res.status(200).json({
+      username: res.locals.gh_username,
+      node_id: res.locals.gh_node_id,
+      avatar_url: res.locals.gh_avatar_url,
+    });
   }
-})
+  return res.sendStatus(401);
+});
 
 // Creates a new study guide.
 app.post(
@@ -66,7 +67,7 @@ app.post(
 // Retrieves a user's study guides.
 app.post(
   '/api/studyguide',
-  dbController.getUserStudyGuides, 
+  dbController.getUserStudyGuides,
   dbController.getStudyGuideCategories,
   (req, res) => {
     const { studyGuidesArray } = res.locals;

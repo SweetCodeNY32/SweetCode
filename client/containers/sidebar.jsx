@@ -1,65 +1,134 @@
-//sidebar component that will have a title: "Your Study Guides"
-//will have a 'create a new study guide' and [+] button
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+// Import MUI components
+import {
+  Box,
+  Divider,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+// Import local components
+import NewStudyGuideModal from './StudyGuideModal';
+import LoginStatus from './LoginStatus';
 
-//will also have all of the other study guide names 
-import React, {useState, useEffect} from 'react';
-import Button from '@mui/material/Button'
-import {Link} from 'react-router-dom';
-import Modal from '@mui/material/Modal';
-import NewStudyGuideModal from './StudyGuideModal'
-import Fade from '@mui/material/Fade';
-import { Box, Backdrop } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
-
-const Sidebar = (props) => {
-  //state that will hold the names of study guides in the side bar currently
+// TODO: add props validation
+export default function Sidebar({
+  username,
+  nodeId,
+  avatarUrl,
+  setUser,
+  studyGuideNames,
+}) {
+  // state that will hold the names of study guides in the side bar currently
   const [studyGuides, setStudyGuides] = useState([]);
-  const username = props.username;
+
+  // Handle logic for adding new study guides to the SQL database
+  const handleModalSubmit = async (guideName, categories) => {
+    const formattedGuideName = guideName.replace(/\s/g, '-');
+    const newGuide = {
+      userId: nodeId,
+      name: formattedGuideName,
+      categories,
+    };
+    // console.log('this is the new study guide added:', newGuide);
+    await axios.post('/api/studyguide/create', newGuide);
+    setStudyGuides([...studyGuides, newGuide]);
+  };
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log('props in sidebar: ', props);
-  console.log('studyguides in sidebar:', studyGuides);
 
-  useEffect(()=> {
-    setStudyGuides(props.studyGuideNames)
-  },[props.studyGuideNames])
+  // console.log('studyguides in sidebar:', studyGuides);
+
+  useEffect(() => {
+    setStudyGuides(studyGuideNames);
+  }, [studyGuideNames]);
 
   const studyGuideArray = [];
   const studyGuideLength = studyGuides.length;
-  for (let i = 0; i < studyGuideLength; i++){
+  for (let i = 0; i < studyGuideLength; i += 1) {
     studyGuideArray.push(
-      <li className="sidebar-guides" key={`route${studyGuides[i]}`}><Link to={`/${studyGuides[i]}`}>
-        <Button 
-          variant="text" 
-        >{studyGuides[i]}</Button>
-      </Link></li>
-
-      /* <li key={`studyGuideSidebar${i}`}>
-        <Button variant="text">{studyGuides[i]}</Button>
-      </li> */
-    )
+      <Link
+        key={`route${studyGuides[i]}`}
+        to={`/${studyGuides[i]}`}
+        style={{
+          textDecoration: 'none',
+        }}
+      >
+        <Button
+          variant="text"
+          size="small"
+          sx={{
+            width: '100%',
+            my: 0.5,
+          }}
+        >
+          {studyGuides[i]}
+        </Button>
+      </Link>,
+    );
   }
 
-  return(
-    <div id='sidebar'>
-      <h3 id="sidebar-intro">Hey {username}, here are your study guides!</h3>
-        <Button
-          onClick={handleOpen}
-          variant="contained"
-        >
-          Create a new study guide 
-        </Button>
-        <NewStudyGuideModal open={open} handleClose={handleClose} handleSubmit={props.handleModalSubmit}/> 
-         <ul>
-           {studyGuideArray}
-         </ul>
-         
-
-    </div>
-
-  )
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '20%',
+      }}
+    >
+      {/* Header for sidebar */}
+      <Typography
+        variant="h5"
+        align="center"
+        sx={{
+          p: 1,
+        }}
+      >
+        Study Guides
+      </Typography>
+      <Divider orientation="horizontal" />
+      {/* Contains the list of study guides a user has */}
+      <Box
+        id="study-guides"
+        sx={{
+          p: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+        }}
+      >
+        {studyGuideArray}
+        <Tooltip title="Create a new study guide" arrow>
+          <Button
+            onClick={handleOpen}
+            size="small"
+            variant="contained"
+            sx={{
+              my: 0.5,
+            }}
+          >
+            <AddRoundedIcon />
+          </Button>
+        </Tooltip>
+        <NewStudyGuideModal
+          open={open}
+          handleClose={handleClose}
+          handleSubmit={handleModalSubmit}
+        />
+      </Box>
+      <Divider orientation="horizontal" />
+      {/* Login status for the user. Also contains logout logic and "about" for SwellCode */}
+      <LoginStatus
+        username={username}
+        avatarUrl={avatarUrl}
+        setUser={setUser}
+      />
+    </Box>
+  );
 }
-
-export default Sidebar;

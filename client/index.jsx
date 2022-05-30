@@ -2,12 +2,12 @@ import React from 'react';
 import { createRoot } from 'react-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import App from './containers/app.jsx';
+import App from './containers/App';
 import './styles.css';
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
       main: '#FF5757',
     },
@@ -17,12 +17,10 @@ const theme = createTheme({
   },
 });
 
-
-
 const root = createRoot(document.querySelector('#root'));
 root.render(
-<ThemeProvider theme={theme}>
-  <CssBaseline />
-  <App />
-</ThemeProvider>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <App />
+  </ThemeProvider>,
 );

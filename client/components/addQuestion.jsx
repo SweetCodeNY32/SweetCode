@@ -1,9 +1,15 @@
-//component used to add questions to a specific category
-//will have input text field and add question button
+// TODO: add props validation
+/* eslint-disable react/prop-types */
+// component used to add questions to a specific category
+// will have input text field and add question button
 
-import React, {useState} from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import React, { useState } from 'react';
+// Import MUI components
+import {
+  Box,
+  Button,
+  TextField,
+} from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 
 /*
@@ -14,25 +20,26 @@ expecting props to be:
 
 */
 
-const AddQuestion = (props) => {
+export default function AddQuestion({ category, categoryIndex, handleSubmit }) {
   const [question, setQuestion] = useState('');
-  const category = props.category;
-  return( 
-    <div className="add-question">
+  return (
+    <Box className="add-question">
       <TextField
         className="question-text"
-        variant="outlined" 
-        label="Add question here"
+        variant="outlined"
+        size="small"
+        label="Search for a new question"
         onChange={(e) => setQuestion(e.target.value)}
-        >{question}</TextField>
-      
-      <Button 
+      >
+        {question}
+      </TextField>
+      <Button
         className="question-button"
         variant="outlined"
-        onClick={() => props.handleSubmit(question, category, props.categoryIndex)}
-        >Add Question</Button>
-    </div>
-  )
+        onClick={() => handleSubmit(question, category, categoryIndex)}
+      >
+        Add Question
+      </Button>
+    </Box>
+  );
 }
-
-export default AddQuestion;

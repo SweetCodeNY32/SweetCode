@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['@babel/polyfill', './client/index.js'],
+  entry: ['@babel/polyfill', './client/index.jsx'],
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
@@ -30,7 +30,7 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', ],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpg|gif)$/i,
@@ -52,7 +52,6 @@ module.exports = {
     },
     proxy: {
       '/api': 'http://localhost:3000',
-      // '/signin/github-callback': 'http://localhost:3000'
     },
   },
 };

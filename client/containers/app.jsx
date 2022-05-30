@@ -1,59 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 import axios from 'axios';
-import Home from './Home.jsx';
-import Login from './Login.jsx';
+// Import MUI components
+import { Box } from '@mui/material';
+// Import local components
+import LoginPage from './LoginPage';
+import HomePage from './HomePage';
 
-//the main application container
-const App = () => {
-
-  //will hold logic for react hooks to manage username and setting username
+export default function App() {
   const [user, setUser] = useState({
     username: '',
-    nodeId: '0'
+    nodeId: '0',
+    avatarUrl: '',
   });
-  console.log('user', user);
+
+  /**
+   * Upon rendering the application, and upon any following events taken within the application,
+   * send a GET request to the backend server and check if the user's authentication token is valid.
+   */
   useEffect(() => {
     async function checkAuthentication() {
-      let response = await axios.get('/api/checkauth')
-      console.log('useffect response from checkauth', response)
-      if(response.status === 200){
+      const response = await axios.get('/api/checkauth');
+      if (response.status === 200) {
+        console.log(response);
         setUser({
-          username: response.data.username, 
-          nodeId: response.data.node_id
-        })
-      } else { 
+          username: response.data.username,
+          nodeId: response.data.node_id,
+          avatarUrl: response.data.avatar_url,
+        });
+      } else {
         setUser({
-          username: '', 
-          nodeId: '0' 
-        })
+          username: '',
+          nodeId: '0',
+          avatarUrl: '',
+        });
       }
     }
     checkAuthentication();
-    // if(username.length === 0) 
-    // if the response status is 200, setUser to (gh_username, gh_node_id);
-    // if the response status is 401, setUser to ('', 0)
-  }, [])
-  
+  }, []);
 
-  //if user is not currently signed in, will render the login page
-  //login component will have access to setusername 
-  if (user.username === ''){
-    return (
-      <Login setUser={setUser}/>
-    );
-  }
-
-  //once user is logged in, will render the sidebar and study guide pages
-  //will pass in the username into the sidebar to provide personality to the sidebar
-  else {
-    return(
-    <div className="logged-in">
-      <Home user={user}/>
-    </div>
-    );
-  }
+  /**
+   * Depending on whether a user is logged in via GitHub, render the login page OR their home page.
+   */
+  return (
+    <Box
+      id="app"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+      }}
+    >
+      {user.username === ''
+        ? <LoginPage />
+        : (
+          <HomePage
+            username={user.username}
+            nodeId={user.nodeId}
+            avatarUrl={user.avatarUrl}
+            setUser={setUser}
+          />
+        )}
+    </Box>
+  );
 }
-
-
-export default App;
