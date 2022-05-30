@@ -53,7 +53,6 @@ export default function Sidebar({
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i += 1) {
     studyGuideArray.push(
-      // <li key={`route${studyGuides[i]}`}>
       <Link
         key={`route${studyGuides[i]}`}
         to={`/${studyGuides[i]}`}
@@ -64,29 +63,31 @@ export default function Sidebar({
           {studyGuides[i]}
         </Button>
       </Link>,
-      // </li>,
-      /* <li key={`studyGuideSidebar${i}`}>
-        <Button variant="text">{studyGuides[i]}</Button>
-      </li> */
     );
   }
 
   return (
     <Box
       sx={{
-        p: 1,
         display: 'flex',
         flexDirection: 'column',
         width: '20%',
       }}
     >
-      <Typography>
+      <Typography
+        variant="h5"
+        align="center"
+        sx={{
+          p: 1,
+        }}
+      >
         Study Guides
       </Typography>
       <Divider orientation="horizontal" />
       <Box
         id="study-guides"
         sx={{
+          p: 1,
           display: 'flex',
           flexDirection: 'column',
           flexGrow: 1,

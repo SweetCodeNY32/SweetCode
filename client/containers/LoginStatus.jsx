@@ -1,24 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+// Import React GitHub button
+import GitHubButton from 'react-github-btn';
 // Import MUI components
 import {
   Avatar,
   Box,
   Button,
-  Divider,
-  Tooltip,
+  Menu,
+  MenuItem,
   Typography,
 } from '@mui/material';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 
-// setUser({
-//   username: '',
-//   nodeId: '0',
-//   avatarUrl: '',
-// });
-
+/**
+ * TODO: Add a settings modal to this component. To start, could allow user to change colors
+ * of their application (primary and secondary, see index.jsx to see how those are established).
+ * Could also add a dark/light mode toggle the same way. Developing in dark mode.
+ */
 // TODO: add props validation
 // eslint-disable-next-line react/prop-types
 export default function LoginStatus({ username, avatarUrl, setUser }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleMenuOpen = () => {
+    setMenuOpen(true);
+  };
+
+  const handleMenuClose = () => {
+    setMenuOpen(false);
+  };
+
   const handleLogout = () => {
     setUser({
       username: '',
@@ -31,27 +41,53 @@ export default function LoginStatus({ username, avatarUrl, setUser }) {
     <Box
       id="login-status"
       sx={{
+        p: 1,
         display: 'flex',
         alignItems: 'center',
       }}
     >
-      <Tooltip title="Logout" arrow>
-        <Button
-          onClick={handleLogout}
+      <Button
+        onClick={handleMenuOpen}
+        color="primary"
+        sx={{
+          maxWidth: '56px',
+          maxHeight: '56px',
+          minWidth: '56px',
+          minHeight: '56px',
+        }}
+      >
+        <Avatar
+          variant="rounded"
+          alt={username}
+          src={avatarUrl}
           sx={{
-            maxWidth: '24px',
-            maxHeight: '24px',
-            minWidth: '24px',
-            minHeight: '24px',
+            width: '42px',
+            height: '42px',
           }}
+        />
+      </Button>
+      <Menu
+        id="user-menu"
+        open={menuOpen}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={() => {
+          handleMenuClose();
+          handleLogout();
+        }}
         >
-          <ArrowBackIosNewRoundedIcon fontSize="small" />
-        </Button>
-      </Tooltip>
-      <Avatar alt={username} src={avatarUrl} />
-      <Typography>
+          Logout
+        </MenuItem>
+      </Menu>
+      <Typography
+        sx={{
+          px: 1,
+        }}
+      >
         {username}
       </Typography>
+      {/* GitHub Star Button, implement later when site is ready */}
+      {/* <GitHubButton href="https://github.com/SweetCodeNY32/SweetCode" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star SweetCodeNY32/SweetCode on GitHub">Star</GitHubButton> */}
     </Box>
   );
 }
