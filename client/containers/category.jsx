@@ -13,6 +13,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Box,
+  Divider,
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -45,7 +46,8 @@ export default function Category({
   const questionComponents = [];
   for (let i = 0; i < questions.length; i += 1) {
     questionComponents.push(
-      <li key={`${category}question${i}`}>
+      <Box>
+        <Divider orientation="horizontal" />
         <Question
           {...questions[i]}
           category={category}
@@ -53,7 +55,7 @@ export default function Category({
           // andleNoteSubmit={handleNoteSubmit}
           id={`${category}question${i}`}
         />
-      </li>,
+      </Box>,
     );
   }
 
@@ -73,7 +75,8 @@ export default function Category({
           <Typography>{category}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ul className="questions">{questionComponents}</ul>
+          {questionComponents}
+          <Divider orientation="horizontal" />
           <AddQuestion
             category={category}
             handleSubmit={handleQuestionSubmit}
@@ -81,6 +84,7 @@ export default function Category({
           />
         </AccordionDetails>
       </Accordion>
+      {questionComponents}
     </Box>
   );
 }

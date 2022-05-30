@@ -31,14 +31,20 @@ export default function StudyGuide(props) {
         {
           question: 'two sum',
           questionslug: 'two-sum',
-          difficulty: 'hard',
+          difficulty: 'easy',
           status: '',
         },
         {
           question: 'three sum',
           questionslug: 'three-sum',
-          difficulty: 'easy',
+          difficulty: 'medium',
           status: 'ac',
+        },
+        {
+          question: 'four sum',
+          questionslug: 'three-sum',
+          difficulty: 'hard',
+          status: '',
         },
       ],
     },
