@@ -53,12 +53,28 @@ export default function Sidebar({
   const studyGuideLength = studyGuides.length;
   for (let i = 0; i < studyGuideLength; i += 1) {
     studyGuideArray.push(
+    //   <Link
+    //   key={`route${studyGuides[i]}`}
+    //   to={`/${studyGuides[i]}`}
+    // >
+    //   <Button
+    //     variant="contained"
+    //   >
+    //     {studyGuides[i]}
+    //   </Button>
+    // </Link>,
       <Link
         key={`route${studyGuides[i]}`}
         to={`/${studyGuides[i]}`}
+        style={{
+          textDecoration: 'none',
+        }}
       >
         <Button
           variant="text"
+          sx={{
+            m: 0.5,
+          }}
         >
           {studyGuides[i]}
         </Button>
@@ -99,6 +115,9 @@ export default function Sidebar({
             onClick={handleOpen}
             size="small"
             variant="contained"
+            sx={{
+              m: 0.5,
+            }}
           >
             <AddRoundedIcon />
           </Button>
