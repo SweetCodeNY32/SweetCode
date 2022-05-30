@@ -97,6 +97,7 @@ export default function HomePage({ username, nodeId, avatarUrl, setUser }) {
           id="study-guides"
           sx={{
             width: '80%',
+            height: '100%',
           }}
         >
           <Routes>
