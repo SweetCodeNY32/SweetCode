@@ -6,8 +6,10 @@ import {
   Avatar,
   Box,
   Button,
+  Divider,
   Menu,
   MenuItem,
+  Tooltip,
   Typography,
 } from '@mui/material';
 
@@ -41,53 +43,84 @@ export default function LoginStatus({ username, avatarUrl, setUser }) {
     <Box
       id="login-status"
       sx={{
-        p: 1,
         display: 'flex',
         alignItems: 'center',
       }}
     >
-      <Button
-        onClick={handleMenuOpen}
-        color="primary"
+      {/* User-specific information */}
+      <Box
+        id="user-info"
         sx={{
-          maxWidth: '56px',
-          maxHeight: '56px',
-          minWidth: '56px',
-          minHeight: '56px',
+          py: 0.5,
+          px: 1,
+          display: 'flex',
+          alignItems: 'center',
+          flexGrow: 1,
         }}
       >
-        <Avatar
-          variant="rounded"
-          alt={username}
-          src={avatarUrl}
+        <Button
+          onClick={handleMenuOpen}
+          color="primary"
           sx={{
-            width: '42px',
-            height: '42px',
+            maxWidth: '40px',
+            maxHeight: '40px',
+            minWidth: '40px',
+            minHeight: '40px',
           }}
-        />
-      </Button>
-      <Menu
-        id="user-menu"
-        open={menuOpen}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={() => {
-          handleMenuClose();
-          handleLogout();
-        }}
         >
-          Logout
-        </MenuItem>
-      </Menu>
-      <Typography
+          <Avatar
+            variant="rounded"
+            alt={username}
+            src={avatarUrl}
+            sx={{
+              width: '32px',
+              height: '32px',
+            }}
+          />
+        </Button>
+        {/* TODO: make menu open upwards to prevent overlap on user information */}
+        <Menu
+          id="user-menu"
+          open={menuOpen}
+          onClose={handleMenuClose}
+        >
+          <MenuItem onClick={() => {
+            handleMenuClose();
+            handleLogout();
+          }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
+        <Typography
+          sx={{
+            px: 1,
+          }}
+        >
+          {username}
+        </Typography>
+      </Box>
+      <Divider orientation="vertical" />
+      {/* Information about our application */}
+      <Box
+        id="app-info"
         sx={{
           px: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          alignContent: 'center',
         }}
       >
-        {username}
-      </Typography>
-      {/* GitHub Star Button, implement later when site is ready */}
-      {/* <GitHubButton href="https://github.com/SweetCodeNY32/SweetCode" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star SweetCodeNY32/SweetCode on GitHub">Star</GitHubButton> */}
+        <GitHubButton
+          href="https://github.com/SweetCodeNY32/SweetCode"
+          data-icon="octicon-star"
+          data-show-count="true"
+          aria-label="Star SweetCodeNY32/SweetCode on GitHub"
+        >
+          Star
+        </GitHubButton>
+      </Box>
     </Box>
   );
 }
